@@ -1,15 +1,19 @@
 package com.pos.laborator.controllers
 
+import com.pos.laborator.controllers.TicketController.Companion.TICKET_EXAMPLE
 import com.pos.laborator.model.Database
+import com.pos.laborator.utils.buildHateoasCollection
+import com.pos.laborator.utils.buildHateoasModel
+import com.pos.laborator.view.Entity
 import com.pos.laborator.view.Event
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import com.pos.laborator.view.Packet
 import com.pos.laborator.view.Ticket
-import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.hateoas.CollectionModel
 import org.springframework.hateoas.EntityModel
-import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn
 
 /**
  * OpenAPI Docs available after deployment at: http://localhost:8080/swagger-ui/index.html#/
@@ -19,254 +23,150 @@ import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder
 @RequestMapping("/api/event-manager")
 open class EventController(private val database: Database) {
 
+    companion object {
+        val EVENT_EXAMPLE = Event(ID = 0, ID_OWNER = 0, name = "Event Example", location = "Location Example", description = "Description Example", seats = 100)
+    }
+
     @RequestMapping("/events/{id}", method = [RequestMethod.GET])
     fun getEvent(@PathVariable id: Int): ResponseEntity<EntityModel<Event>> {
         return try {
             val event = database.getEvent(id)
-            val eventModel = EntityModel.of(
-                event,
-                WebMvcLinkBuilder.linkTo(
-                    WebMvcLinkBuilder.methodOn(EventController::class.java).getEvent(id)
-                ).withSelfRel(),
-                WebMvcLinkBuilder.linkTo(
-                    WebMvcLinkBuilder.methodOn(EventController::class.java).getEvents()
-                ).withRel("events")
-            )
-            ResponseEntity.ok(eventModel)
+            val eventModel = buildHateoasModel(event) {
+                self { methodOn(EventController::class.java).getEvent(id) }
+                parent { methodOn(EventController::class.java).getEvents() }
+            }
+            ResponseEntity(eventModel, HttpStatus.OK)
         } catch (e: Exception) {
-            println("Error: " + e.message)
-            ResponseEntity.notFound().build()
+            val eventModel = buildHateoasModel(EVENT_EXAMPLE) {
+                self { methodOn(EventController::class.java).getEvent(id) }
+                parent { methodOn(EventController::class.java).getEvents() }
+            }
+            ResponseEntity(eventModel, HttpStatus.NOT_FOUND)
         }
     }
 
-
     @RequestMapping(value = ["/events/{id}"], method = [RequestMethod.PUT])
-    fun updateEvent(@PathVariable id: Int, @RequestBody event: Event): ResponseEntity<Unit> {
+    fun updateEvent(@PathVariable id: Int, @RequestBody event: Event): ResponseEntity<EntityModel<Event>> {
         try {
-            database.getEvent(id)
             event.ID = id
             database.updateEvent(event)
-            return ResponseEntity(HttpStatus.ACCEPTED)
+            val json = buildHateoasModel(event) {
+                self { methodOn(EventController::class.java).getEvent(id) }
+                parent { methodOn(EventController::class.java).getEvents() }
+            }
+            return ResponseEntity.ok(json)
         } catch (e: Exception) {
-            return ResponseEntity(HttpStatus.NOT_FOUND)
+            val json = buildHateoasModel(EVENT_EXAMPLE) {
+                self { methodOn(EventController::class.java).updateEvent(id, event) }
+                parent { methodOn(EventController::class.java).getEvents() }
+            }
+            return ResponseEntity(json, HttpStatus.NOT_FOUND)
         }
     }
 
     @RequestMapping(value = ["/events/{id}"], method = [RequestMethod.DELETE])
-    fun deleteEvent(@PathVariable id: Int): ResponseEntity<Unit> {
+    fun deleteEvent(@PathVariable id: Int): ResponseEntity<EntityModel<Event>> {
         try {
+            val event = database.getEvent(id)
             database.deleteEvent(id)
-            return ResponseEntity(HttpStatus.OK)
+            val json = buildHateoasModel(event) {
+                self { methodOn(EventController::class.java).getEvent(id) }
+                parent { methodOn(EventController::class.java).getEvents() }
+            }
+            return ResponseEntity(json, HttpStatus.OK)
         } catch (e: Exception) {
-            return ResponseEntity(Unit, HttpStatus.NOT_FOUND)
+            val json = buildHateoasModel(EVENT_EXAMPLE) {
+                self { methodOn(EventController::class.java).deleteEvent(id) }
+                parent { methodOn(EventController::class.java).getEvents() }
+            }
+            return ResponseEntity( json, HttpStatus.NOT_FOUND)
         }
     }
 
     @RequestMapping(value = ["/events/{id}"], method = [RequestMethod.PATCH])
     fun patchEvent(@PathVariable id: Int,
-                   @RequestParam ownerId: Int,
-                   @RequestParam name: String,
-                   @RequestParam location: String,
-                   @RequestParam description: String,
-                   @RequestParam seats: Int
-    ): ResponseEntity<Unit> {
-            val response = database.patchEvent(id, ownerId, name, location, description, seats)
-            if (response) {
-                return ResponseEntity(HttpStatus.OK)
-            } else {
-                return ResponseEntity(HttpStatus.NOT_FOUND)
+                   @RequestParam(required = false) ownerId: Int?,
+                   @RequestParam(required = false) name: String?,
+                   @RequestParam(required = false) location: String?,
+                   @RequestParam(required = false) description: String?,
+                   @RequestParam(required = false) seats: Int?
+    ): ResponseEntity<EntityModel<Event>> {
+        val changed = database.patchEvent(id, ownerId, name, location, description, seats)
+        if (changed) {
+            val confirmation = database.getEvent(id)
+            val json = buildHateoasModel(confirmation) {
+                self { methodOn(EventController::class.java).getEvent(id) }
+                parent { methodOn(EventController::class.java).getEvents() }
             }
-    }
-
-    ///////////////////
-    @RequestMapping(value = ["/event-packets/{packetId}/events"], method = [RequestMethod.GET])
-    fun getEventsByPacket(@PathVariable packetId: Int): ResponseEntity<List<Event>> {
-        val response = database.getEventsByPacket(packetId)
-        return if (response.isNotEmpty()) {
-            ResponseEntity.ok(response)
+            return ResponseEntity(json, HttpStatus.OK)
         } else {
-            ResponseEntity(HttpStatus.NOT_FOUND)
+            val json = buildHateoasModel(EVENT_EXAMPLE) {
+                self { methodOn(EventController::class.java).patchEvent(id, ownerId, name, location, description, seats) }
+                parent { methodOn(EventController::class.java).getEvents() }
+            }
+            return ResponseEntity(json, HttpStatus.NOT_FOUND)
+
         }
     }
 
-    ////////////////
-    @RequestMapping(value = ["/event-packets/{packetId}"], method = [RequestMethod.GET])
-    fun getEventPacket(@PathVariable packetId: Int): ResponseEntity<Packet> {
-        try {
-            val response = database.getPacket(packetId)
-            return ResponseEntity.ok(response)
-        } catch (e: Exception) {
-            return ResponseEntity(HttpStatus.NOT_FOUND)
-        }
-    }
-
-    @RequestMapping(value = ["/event-packets/{packetId}"], method = [RequestMethod.PUT])
-    fun updateEventPacket(@PathVariable packetId: Int, @RequestBody packet: Packet): ResponseEntity<Unit> {
-        try {
-            database.getPacket(packetId)
-            packet.ID = packetId
-            database.updatePacket(packet)
-            return ResponseEntity(HttpStatus.ACCEPTED)
-        } catch (e: Exception) {
-            return ResponseEntity(HttpStatus.NOT_FOUND)
-        }
-    }
-
-    @RequestMapping(value = ["/event-packets/{packetId}"], method = [RequestMethod.PATCH])
-    fun patchEventPacket(@PathVariable packetId: Int,
-                          @RequestParam ownerId: Int,
-                          @RequestParam name: String,
-                          @RequestParam location: String,
-                          @RequestParam description: String,
-                          ): ResponseEntity<Unit> {
-        try {
-            database.patchPacket(packetId, ownerId, name, location, description)
-            return ResponseEntity(HttpStatus.OK)
-        } catch (e: Exception) {
-            return ResponseEntity(HttpStatus.NOT_FOUND)
-        }
-    }
-
-    @RequestMapping(value = ["/event-packets/{packetId}"], method = [RequestMethod.DELETE])
-    fun deleteEventPacket(@PathVariable packetId: Int, @RequestBody packet: Packet): ResponseEntity<Unit> {
-        val response = database.deletePacket(packetId)
-        return if (response) {
-            ResponseEntity(HttpStatus.OK)
-        } else {
-            ResponseEntity(HttpStatus.NOT_FOUND)
-        }
-    }
-
-    /////////////
     @RequestMapping(value = ["/events/{id}/event-packets"], method = [RequestMethod.GET])
-    fun getEventPacketsByEventId(@PathVariable id: Int): ResponseEntity<List<Packet>> {
+    fun getEventPacketsByEventId(@PathVariable id: Int): ResponseEntity<CollectionModel<EntityModel<Entity>>> {
         val response = database.getPacketsByEventId(id)
         return if (response.isNotEmpty()) {
-            ResponseEntity.ok(response)
+            val json = buildHateoasCollection(response) {
+                self { methodOn(EventController::class.java).getEventPacketsByEventId(id) }
+                parent { methodOn(EventController::class.java).getEvent(id) }
+            }
+            ResponseEntity(json, HttpStatus.OK)
         } else {
-            ResponseEntity(HttpStatus.NOT_FOUND)
-        }
-    }
-
-    //////////////////////////////////
-    @RequestMapping(value = ["/tickets/{cod}"], method = [RequestMethod.GET])
-    fun getTicketByCode(@PathVariable cod: String): ResponseEntity<Ticket> {
-        try {
-            val ticket = database.getTicket(cod)
-            return ResponseEntity.ok(ticket)
-        } catch (e: Exception) {
-            return ResponseEntity(HttpStatus.NOT_FOUND)
-        }
-    }
-
-    @RequestMapping(value = ["/tickets/{cod}"], method = [RequestMethod.PUT])
-    fun updateTicketByCode(@PathVariable cod: String, ticket: Ticket): ResponseEntity<Unit> {
-        val response = database.updateTicket(cod, ticket)
-        return if (response) {
-            ResponseEntity(HttpStatus.ACCEPTED)
-        } else {
-            ResponseEntity(HttpStatus.NOT_FOUND)
-        }
-    }
-
-    @RequestMapping(value = ["/tickets/{cod}"], method = [RequestMethod.PATCH])
-    fun patchTicket(@PathVariable cod: String, eventId: Int, groupId: Int): ResponseEntity<Unit> {
-        val response = database.patchTicket(cod, eventId, groupId)
-        return if (response) {
-            ResponseEntity(HttpStatus.ACCEPTED)
-        } else {
-            ResponseEntity(HttpStatus.NOT_FOUND)
-        }
-    }
-
-    @RequestMapping(value = ["/tickets/{cod}"], method = [RequestMethod.DELETE])
-    fun deleteTicketByCode(@PathVariable cod: String): ResponseEntity<Unit> {
-        val response = database.deleteTicket(cod)
-        return if (response) {
-            ResponseEntity(HttpStatus.OK)
-        } else {
-            ResponseEntity(HttpStatus.NOT_FOUND)
+            val json = buildHateoasCollection(response) {
+                self { methodOn(EventController::class.java).getEventPacketsByEventId(id) }
+                parent { methodOn(EventController::class.java).getEvents() }
+            }
+            ResponseEntity(json, HttpStatus.NOT_FOUND)
         }
     }
 
     @RequestMapping(value = ["/events/{id}/tickets/{cod}"], method = [RequestMethod.GET])
-    fun getTicketByEvent(@PathVariable id: Int, @PathVariable cod: String): ResponseEntity<Ticket> {
+    fun getTicketByEvent(@PathVariable id: Int, @PathVariable cod: String): ResponseEntity<EntityModel<Ticket>> {
         try {
             val response = database.getTicketByEventId(id, cod)
-            return ResponseEntity.ok(response)
+            val json = buildHateoasModel(response) {
+                self { methodOn(EventController::class.java).getTicketByEvent(id, cod) }
+                parent { methodOn(EventController::class.java).getEvent(id) }
+            }
+            return ResponseEntity(json, HttpStatus.OK)
         } catch (e: Exception) {
-            return ResponseEntity(HttpStatus.NOT_FOUND)
+            val json = buildHateoasModel(TICKET_EXAMPLE) {
+                self { methodOn(EventController::class.java).getEvent(id) }
+                parent { methodOn(TicketController::class.java).getTickets() }
+            }
+            return ResponseEntity(json, HttpStatus.NOT_FOUND)
         }
-    }
-
-    @RequestMapping(value = ["/event-packets/{packetId}/tickets/{cod}\n"], method = [RequestMethod.GET])
-    fun getTicketByPacket(@PathVariable packetId: Int, @PathVariable cod: String): ResponseEntity<Ticket> {
-        try {
-            val response = database.getTicketByPacketId(packetId, cod)
-            return ResponseEntity.ok(response)
-        } catch (e: Exception) {
-            return ResponseEntity(HttpStatus.NOT_FOUND)
-        }
-    }
-
-    //////////
-    @RequestMapping(value = ["/events"], method = [RequestMethod.GET])
-    fun getEvents(): ResponseEntity<List<Event>> {
-        val events = database.getEvents()
-        return ResponseEntity.ok(events)
     }
 
     @RequestMapping(value = ["/event"], method = [RequestMethod.POST])
-    fun addEvent(@RequestBody event: Event): ResponseEntity<Unit> {
+    fun addEvent(@RequestBody event: Event): ResponseEntity<EntityModel<Event>> {
         database.addEvent(event)
-        return ResponseEntity(HttpStatus.OK)
-    }
-
-    @RequestMapping(value = ["/event-packets"], method = [RequestMethod.GET])
-    fun getPackets(): ResponseEntity<List<Packet>> {
-        val packets = database.getPackets()
-        return ResponseEntity.ok(packets)
-    }
-
-    @RequestMapping(value = ["/event-packet"], method = [RequestMethod.POST])
-    fun addPacket(@RequestBody packet: Packet): ResponseEntity<Unit> {
-        database.addPacket(packet)
-        return ResponseEntity(HttpStatus.OK)
-    }
-
-    @RequestMapping(value = ["/tickets"], method = [RequestMethod.GET])
-    fun getTickets(): ResponseEntity<List<Ticket>> {
-        val tickets = database.getTickets()
-        return ResponseEntity.ok(tickets)
-    }
-
-    @RequestMapping(value = ["/ticket"], method = [RequestMethod.POST])
-    fun addTicket(@RequestBody ticket: Ticket): ResponseEntity<Unit> {
-        database.addTicket(ticket)
-        return ResponseEntity(HttpStatus.OK)
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////
-    @RequestMapping(value = ["/events?location={location}"], method = [RequestMethod.GET])
-    fun getEventsByLocation(@PathVariable location: String): ResponseEntity<List<Event>> {
-        val response = database.getEventsByLocation(location)
-        return ResponseEntity.ok(response)
-    }
-
-    @RequestMapping(value = ["/event-packets?page={page}&items_per_page={count}"],
-        method = [RequestMethod.GET])
-    fun getEventPackets(@PathVariable page: Int, @PathVariable count: Int = 3): ResponseEntity<List<Packet>> {
-        try {
-            val response = database.getEventPackets(page, count)
-            return ResponseEntity.ok(response)
-        } catch (e: Exception) {
-            return ResponseEntity(HttpStatus.NOT_FOUND)
+        val json = buildHateoasModel(event) {
+            self { methodOn(EventController::class.java).getEvent(event.ID) }
+            parent { methodOn(EventController::class.java).getEvents() }
         }
+        return ResponseEntity(json, HttpStatus.OK)
     }
 
-    @RequestMapping(value = ["/events?name={subname}"], method = [RequestMethod.GET])
-    fun getEventsByName(@PathVariable subname: String): ResponseEntity<List<Event>> {
-        val response = database.getEventsBySubName(subname)
-        return ResponseEntity.ok(response)
+    @RequestMapping(value = ["/events"], method = [RequestMethod.GET])
+    fun getEventsByParameters(@RequestParam(required=false) location: String?,
+                            @RequestParam(required=false) subname: String?,
+                            @RequestParam(required=false) subdescription: String?
+    ): ResponseEntity<CollectionModel<EntityModel<Entity>>> {
+        val events: List<Event> = database.getEventsByParameters(location, subname, subdescription)
+        val json = buildHateoasCollection(events) {
+            self { methodOn(EventController::class.java).getEventsByParameters(location, subname, subdescription) }
+            parent { methodOn(EventController::class.java).getEvents() }
+        }
+        return ResponseEntity(json, HttpStatus.OK)
     }
+
+    fun getEvents() = getEventsByParameters(null, null, null)
 }

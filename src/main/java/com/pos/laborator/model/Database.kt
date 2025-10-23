@@ -7,16 +7,16 @@ import org.springframework.stereotype.Component
 
 @Component
 open class Database {
-    private val events: MutableList<Event> = mutableListOf(
+    val events: MutableList<Event> = mutableListOf(
         Event(0, 1, "Balul Bobocilor", "Iasi", "Va asteptam la acest eveniment minunat!", 200),
         Event(1, 0, "Nunta", "Chisinau", "Fiti alaturi de noi in aceasta sarbatoare de neuitat!", 100),
         Event(2, 1, "Careu de elevi", "Iasi", "Careu de 1 Septembrie", 650)
     )
-    private val packets: MutableList<Packet> = mutableListOf(
+    val packets: MutableList<Packet> = mutableListOf(
         Packet(0, 0, "Packet Nunta", "Chisinau", "Include inscrierea, cununia, nunta, zeama."),
         Packet(1, 1, "Packet Scoala", "Iasi", "Incepeti anul scolar cu sarbatori!;)"),
     )
-    private val tickets: MutableList<Ticket> = mutableListOf(
+    val tickets: MutableList<Ticket> = mutableListOf(
         Ticket("Bilet4510", 0, 1),
         Ticket("Bilet2372", 1, 2),
         Ticket("Bilet3011", 1, 0),
@@ -27,10 +27,6 @@ open class Database {
     fun addEvent(event: Event) = events.add(event)
     fun addPacket(packet: Packet) = packets.add(packet)
     fun addTicket(ticket: Ticket) = tickets.add(ticket)
-
-    fun getEvents() = events
-    fun getPackets() = packets
-    fun getTickets() = tickets
 
     fun getEvent(id: Int) = events[id]
     fun getPacket(id: Int) = packets[id]
@@ -106,15 +102,22 @@ open class Database {
         return tickets.find { it.CODE == cod && it.GroupID == id }!!
     }
 
-    fun getEventsByLocation(location: String): List<Event> {
-        return events.filter { it.location == location }
+    fun getEventsByParameters(location: String?, subname: String?, subdesc: String?): List<Event> {
+        val events: List<Event> = this.events
+
+        return events
+            .filter { event ->
+                location.isNullOrBlank() || event.location?.contains(location, ignoreCase = true) == true
+            }
+            .filter { event ->
+                subname.isNullOrBlank() || event.name.contains(subname, ignoreCase = true)
+            }
+            .filter { event ->
+                subdesc.isNullOrBlank() || event.description?.contains(subdesc, ignoreCase = true) == true
+            }
     }
 
     fun getEventPackets(page: Int, packetsPerPage: Int): List<Packet> {
         return packets.chunked(packetsPerPage)[page]
-    }
-
-    fun getEventsBySubName(sn: String): List<Event> {
-        return events.filter { it.name.contains(sn) }
     }
 }

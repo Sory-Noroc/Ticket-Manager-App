@@ -4,17 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="400e8ed3-3534-47fc-bb2b-220025ebffb9" name="Changes" comment="">
+    <list default="true" id="400e8ed3-3534-47fc-bb2b-220025ebffb9" name="Changes" comment="First commit. Half of project">
       <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/Main.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/view/Packet.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/view/Ticket.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/utils/HateoasBuilder.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/controllers/EventController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/controllers/EventController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/model/Database.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/model/Database.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/view/Event.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/view/Event.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/view/Packet.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/view/Packet.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/view/Ticket.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/view/Ticket.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +26,7 @@
       <list>
         <option value="Kotlin Data Class" />
         <option value="Kotlin Class" />
+        <option value="Kotlin JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -43,6 +44,8 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "JUnit.DatabaseTest.addEvent.executor": "Run",
+    "JUnit.DatabaseTest.getEventsByLocation.executor": "Run",
     "Maven.EventService [clean,install].executor": "Run",
     "Maven.EventService [clean].executor": "Run",
     "Maven.EventService [compile].executor": "Run",
@@ -62,7 +65,9 @@
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.EventService.executor": "Run",
-    "git-widget-placeholder": "main",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "proiect",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
@@ -73,7 +78,7 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
+    "settings.editor.selected.configurable": "editor.preferences.folding",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -81,8 +86,17 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Uni\Anul 4\Semestru 1\POS\PROIECT\eventService\src\main\java\com\pos\laborator" />
     </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
       <recent name="view" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.pos.laborator.model" />
+    </key>
+    <key name="K2MoveDeclarationsDialog.RECENT_PACKAGE_KEY">
+      <recent name="com.pos.laborator.utils" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -91,6 +105,38 @@
     </option>
   </component>
   <component name="RunManager" selected="Spring Boot.EventService">
+    <configuration name="DatabaseTest.addEvent" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="EventService" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.pos.laborator.model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.pos.laborator.model" />
+      <option name="MAIN_CLASS_NAME" value="com.pos.laborator.model.DatabaseTest" />
+      <option name="METHOD_NAME" value="addEvent" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DatabaseTest.getEventsByLocation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="EventService" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.pos.laborator.model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.pos.laborator.model" />
+      <option name="MAIN_CLASS_NAME" value="com.pos.laborator.model.DatabaseTest" />
+      <option name="METHOD_NAME" value="getEventsByLocation" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="UpgradeSpringBoot_2_0" type="OpenRewriteRunConfigurationType" factoryName="OpenRewrite" temporary="true" nameIsGenerated="true">
       <option name="activeRecipes" value="org.openrewrite.java.spring.boot2.UpgradeSpringBoot_2_0" />
       <option name="workingDirectory" value="$PROJECT_DIR$" />
@@ -118,6 +164,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.EventService" />
+        <item itemvalue="JUnit.DatabaseTest.getEventsByLocation" />
+        <item itemvalue="JUnit.DatabaseTest.addEvent" />
         <item itemvalue="OpenRewrite.UpgradeSpringBoot_2_5" />
         <item itemvalue="OpenRewrite.UpgradeSpringBoot_2_0" />
       </list>
@@ -143,11 +191,28 @@
       <workItem from="1761034201597" duration="3247000" />
       <workItem from="1761046904565" duration="541000" />
       <workItem from="1761052496138" duration="21234000" />
-      <workItem from="1761113277639" duration="12727000" />
+      <workItem from="1761113277639" duration="13939000" />
+      <workItem from="1761129530617" duration="23000" />
+      <workItem from="1761133591391" duration="3382000" />
+      <workItem from="1761150825683" duration="14139000" />
+      <workItem from="1761228599410" duration="19709000" />
     </task>
+    <task id="LOCAL-00001" summary="First commit. Half of project">
+      <option name="closed" value="true" />
+      <created>1761128240491</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1761128240491</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="First commit. Half of project" />
+    <option name="LAST_COMMIT_MESSAGE" value="First commit. Half of project" />
   </component>
 </project>

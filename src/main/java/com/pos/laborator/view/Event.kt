@@ -1,13 +1,16 @@
 package com.pos.laborator.view
 
+import org.springframework.hateoas.server.core.Relation
+
+@Relation(collectionRelation = "events")
 data class Event(
     var ID: Int = 0,
     var ID_OWNER: Int,
     var name: String,  // Unique
     var location: String?,
-    private var description: String?,
-    private var seats: Int?
-) {
+    var description: String?,
+    var seats: Int?
+): Entity() {
     fun setOwnerId(ownerId: Int): Event {
         ID_OWNER = ownerId
         return this
