@@ -1,17 +1,18 @@
-package com.pos.laborator.view
+package com.pos.laborator.model
 
+import com.pos.laborator.interfaces.DataObject
 import org.springframework.hateoas.server.core.Relation
 
 @Relation(collectionRelation = "packets")
 data class Packet(
-    var ID: Int = 0,
-    var ID_OWNER: Int,
+    var ID: Int? = null,
+    var ownerId: Int,
     var name: String,
     var location: String?,
     var description: String?
-): Entity() {
+): DataObject {
     fun setOwnerId(ownerId: Int): Packet {
-        ID_OWNER = ownerId
+        this.ownerId = ownerId
         return this
     }
 

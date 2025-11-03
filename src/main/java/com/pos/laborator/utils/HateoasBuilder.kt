@@ -4,7 +4,7 @@ import org.springframework.hateoas.EntityModel
 import org.springframework.hateoas.Link
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder
 
-class HateoasModelBuilder<T>(private val resource: T?) {
+class HateoasModelBuilder<T>(private val resource: T) {
     private val links = mutableListOf<Link>()
 
     fun self(linkProvider: () -> Any) {
@@ -21,6 +21,10 @@ class HateoasModelBuilder<T>(private val resource: T?) {
 
     fun custom(rel: String, linkProvider: () -> Any) {
         links += WebMvcLinkBuilder.linkTo(linkProvider()).withRel(rel)
+    }
+
+    fun addManualLink(link: Link) {
+        links += link
     }
 
     fun build(): EntityModel<T> = EntityModel.of(resource, *links.toTypedArray())

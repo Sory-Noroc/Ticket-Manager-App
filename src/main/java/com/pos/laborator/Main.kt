@@ -4,8 +4,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-open class EventService
+open class EventAPI
 
-fun main(args:Array<String>){
-    runApplication<EventService>(*args)
+fun main(args:Array<String>) {
+    runApplication<EventAPI>(*args)
 }

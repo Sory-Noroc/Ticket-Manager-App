@@ -5,16 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="400e8ed3-3534-47fc-bb2b-220025ebffb9" name="Changes" comment="First commit. Half of project">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/utils/HateoasBuilder.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/interfaces/DataObject.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/model/Event.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/model/Packet.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/model/Ticket.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/repositories/EventRepository.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/repositories/PacketRepository.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/services/EventService.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/Main.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/controllers/EventController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/controllers/EventController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/model/Database.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/model/Database.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/view/Event.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/view/Event.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/view/Packet.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/view/Packet.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/view/Ticket.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/view/Ticket.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/controllers/EventPacketController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/controllers/EventPacketController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/controllers/TicketController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/controllers/TicketController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/model/Database.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/utils/HateoasBuilder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/utils/HateoasBuilder.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/utils/HateoasCollectionBuilder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/utils/HateoasCollectionBuilder.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/view/Entity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/view/Event.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/view/Packet.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/view/Ticket.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/pos/laborator/model/DatabaseTest.kt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,14 +37,18 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Kotlin Data Class" />
-        <option value="Kotlin Class" />
         <option value="Kotlin JUnit5 Test Class" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 2
@@ -46,6 +62,21 @@
   "keyToString": {
     "JUnit.DatabaseTest.addEvent.executor": "Run",
     "JUnit.DatabaseTest.getEventsByLocation.executor": "Run",
+    "JUnit.DatabaseTest.getEventsByParameters.executor": "Run",
+    "JUnit.EventRepositoryTest.updateData.executor": "Run",
+    "JUnit.UserRepositoryTest.executor": "Run",
+    "JUnit.UserRepositoryTest.testAddData.executor": "Run",
+    "JUnit.UserRepositoryTest.testFetchByLocationSubstring.executor": "Run",
+    "JUnit.UserRepositoryTest.testFetchData.executor": "Run",
+    "JUnit.UserRepositoryTest.testFetchFirstElement.executor": "Run",
+    "JUnit.UserRepositoryTest.testFindSimilarEvent.executor": "Run",
+    "Maven.EventAPI [clean,compile].executor": "Run",
+    "Maven.EventAPI [clean,install].executor": "Run",
+    "Maven.EventAPI [clean].executor": "Run",
+    "Maven.EventAPI [compile].executor": "Run",
+    "Maven.EventAPI [install].executor": "Run",
+    "Maven.EventAPI [org.apache.maven.plugins:maven-clean-plugin:3.4.0:clean].executor": "Run",
+    "Maven.EventAPI [validate].executor": "Run",
     "Maven.EventService [clean,install].executor": "Run",
     "Maven.EventService [clean].executor": "Run",
     "Maven.EventService [compile].executor": "Run",
@@ -64,6 +95,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.EventAPI.executor": "Run",
     "Spring Boot.EventService.executor": "Run",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
@@ -96,17 +128,22 @@
       <recent name="com.pos.laborator.model" />
     </key>
     <key name="K2MoveDeclarationsDialog.RECENT_PACKAGE_KEY">
+      <recent name="com.pos.laborator.interfaces" />
+      <recent name="com.pos.laborator.model" />
+      <recent name="com.pos.laborator.services" />
+      <recent name="com.pos.laborator.repositories" />
       <recent name="com.pos.laborator.utils" />
     </key>
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="mvn clean install" />
+      <command value="mvn clean compile" />
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.EventService">
-    <configuration name="DatabaseTest.addEvent" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="EventService" />
+  <component name="RunManager" selected="Spring Boot.EventAPI">
+    <configuration name="EventRepositoryTest.updateData" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="EventAPI" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.pos.laborator.model.*" />
@@ -114,15 +151,15 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.pos.laborator.model" />
-      <option name="MAIN_CLASS_NAME" value="com.pos.laborator.model.DatabaseTest" />
-      <option name="METHOD_NAME" value="addEvent" />
+      <option name="MAIN_CLASS_NAME" value="com.pos.laborator.model.EventRepositoryTest" />
+      <option name="METHOD_NAME" value="updateData" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DatabaseTest.getEventsByLocation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="EventService" />
+    <configuration name="UserRepositoryTest.testAddData" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="EventAPI" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.pos.laborator.model.*" />
@@ -130,26 +167,56 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.pos.laborator.model" />
-      <option name="MAIN_CLASS_NAME" value="com.pos.laborator.model.DatabaseTest" />
-      <option name="METHOD_NAME" value="getEventsByLocation" />
+      <option name="MAIN_CLASS_NAME" value="com.pos.laborator.model.UserRepositoryTest" />
+      <option name="METHOD_NAME" value="testAddData" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UpgradeSpringBoot_2_0" type="OpenRewriteRunConfigurationType" factoryName="OpenRewrite" temporary="true" nameIsGenerated="true">
-      <option name="activeRecipes" value="org.openrewrite.java.spring.boot2.UpgradeSpringBoot_2_0" />
-      <option name="workingDirectory" value="$PROJECT_DIR$" />
-      <method v="2" />
+    <configuration name="UserRepositoryTest.testFetchByLocationSubstring" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="EventAPI" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.pos.laborator.model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.pos.laborator.model" />
+      <option name="MAIN_CLASS_NAME" value="com.pos.laborator.model.UserRepositoryTest" />
+      <option name="METHOD_NAME" value="testFetchByLocationSubstring" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
-    <configuration name="UpgradeSpringBoot_2_5" type="OpenRewriteRunConfigurationType" factoryName="OpenRewrite" temporary="true" nameIsGenerated="true">
-      <option name="activeRecipes" value="org.openrewrite.java.spring.boot2.UpgradeSpringBoot_2_5" />
-      <option name="workingDirectory" value="$PROJECT_DIR$" />
-      <method v="2" />
+    <configuration name="UserRepositoryTest.testFindSimilarEvent" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="EventAPI" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.pos.laborator.model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.pos.laborator.model" />
+      <option name="MAIN_CLASS_NAME" value="com.pos.laborator.model.UserRepositoryTest" />
+      <option name="METHOD_NAME" value="testFindSimilarEvent" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EventAPI" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="EventAPI" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.pos.laborator.EventAPI" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="EventService" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
-      <module name="EventService" />
+      <module name="EventAPI" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.pos.laborator.EventService" />
       <extension name="coverage">
         <pattern>
@@ -164,10 +231,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.EventService" />
-        <item itemvalue="JUnit.DatabaseTest.getEventsByLocation" />
-        <item itemvalue="JUnit.DatabaseTest.addEvent" />
-        <item itemvalue="OpenRewrite.UpgradeSpringBoot_2_5" />
-        <item itemvalue="OpenRewrite.UpgradeSpringBoot_2_0" />
+        <item itemvalue="JUnit.EventRepositoryTest.updateData" />
+        <item itemvalue="JUnit.UserRepositoryTest.testFindSimilarEvent" />
+        <item itemvalue="JUnit.UserRepositoryTest.testAddData" />
+        <item itemvalue="JUnit.UserRepositoryTest.testFetchByLocationSubstring" />
       </list>
     </recent_temporary>
   </component>
@@ -195,7 +262,30 @@
       <workItem from="1761129530617" duration="23000" />
       <workItem from="1761133591391" duration="3382000" />
       <workItem from="1761150825683" duration="14139000" />
-      <workItem from="1761228599410" duration="19709000" />
+      <workItem from="1761228599410" duration="20509000" />
+      <workItem from="1761289847961" duration="3559000" />
+      <workItem from="1761296828397" duration="2008000" />
+      <workItem from="1761300591557" duration="124000" />
+      <workItem from="1761312939706" duration="789000" />
+      <workItem from="1761339534032" duration="4999000" />
+      <workItem from="1761419428503" duration="581000" />
+      <workItem from="1761420129153" duration="406000" />
+      <workItem from="1761420630873" duration="406000" />
+      <workItem from="1761421052620" duration="1719000" />
+      <workItem from="1761544842429" duration="9356000" />
+      <workItem from="1761575442684" duration="73000" />
+      <workItem from="1761578242252" duration="140000" />
+      <workItem from="1761596010363" duration="4056000" />
+      <workItem from="1761768838711" duration="6436000" />
+      <workItem from="1761805573031" duration="6000" />
+      <workItem from="1761819140148" duration="195000" />
+      <workItem from="1761821590753" duration="7000" />
+      <workItem from="1761841969768" duration="2668000" />
+      <workItem from="1761849079837" duration="5000" />
+      <workItem from="1761983050080" duration="1051000" />
+      <workItem from="1761984323829" duration="4324000" />
+      <workItem from="1762113454036" duration="6224000" />
+      <workItem from="1762187189565" duration="2917000" />
     </task>
     <task id="LOCAL-00001" summary="First commit. Half of project">
       <option name="closed" value="true" />

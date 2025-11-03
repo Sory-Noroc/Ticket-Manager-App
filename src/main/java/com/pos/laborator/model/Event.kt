@@ -1,18 +1,28 @@
-package com.pos.laborator.view
+package com.pos.laborator.model
 
+import com.pos.laborator.interfaces.DataObject
+import jakarta.persistence.Entity
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
+import jakarta.persistence.Id
+import jakarta.persistence.Table
 import org.springframework.hateoas.server.core.Relation
 
+@Entity
+@Table(name = "events")
 @Relation(collectionRelation = "events")
 data class Event(
-    var ID: Int = 0,
-    var ID_OWNER: Int,
-    var name: String,  // Unique
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var ID: Int? = null,
+    var ownerId: Int,
+    var name: String,
     var location: String?,
     var description: String?,
     var seats: Int?
-): Entity() {
+): DataObject {
     fun setOwnerId(ownerId: Int): Event {
-        ID_OWNER = ownerId
+        this.ownerId = ownerId
         return this
     }
 
