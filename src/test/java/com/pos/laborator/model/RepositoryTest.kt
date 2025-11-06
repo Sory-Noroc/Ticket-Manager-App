@@ -36,19 +36,19 @@ open class EventRepositoryTest {
             seats = 10
         )
 
-        assertNull(event1.ID)
-        assertNull(event2.ID)
+        assertNull(event1.id)
+        assertNull(event2.id)
 
         event1 = eventRepository.save(event1)
         event2 = eventRepository.save(event2)
 
-        assertNotNull(event1.ID)
-        assertNotNull(event2.ID)
+        assertNotNull(event1.id)
+        assertNotNull(event2.id)
     }
 
     @Test
     fun testFetchData() {
-        val foundEvent: Event = eventRepository.findById(event2.ID!!).get()
+        val foundEvent: Event = eventRepository.findById(event2.id!!).get()
 
         assertNotNull(foundEvent)
         assertEquals(10, foundEvent.seats)
@@ -105,7 +105,7 @@ open class EventRepositoryTest {
         )
         eventRepository.save(newEvent)
         val returnedEvent: Event = eventRepository.findByName(newEvent.name)
-        assertNotNull(returnedEvent.ID)
+        assertNotNull(returnedEvent.id)
         assertEquals(returnedEvent, newEvent)
         val events = eventRepository.findAll()
         assertEquals(3, events.count())

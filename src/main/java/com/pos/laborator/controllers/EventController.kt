@@ -12,40 +12,54 @@ import org.springframework.hateoas.CollectionModel
 import org.springframework.hateoas.EntityModel
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn
+import java.util.NoSuchElementException
 
 /**
  * OpenAPI Docs available after deployment at: http://localhost:8080/swagger-ui/index.html#/
  */
 @RestController
 @RequestMapping("/api/event-manager")
-open class EventController(private val eventService: EventService) {
+class EventController(private val eventService: EventService) {
 
     companion object {
-        val EVENT_EXAMPLE = Event(ID = 0, ownerId = 0, name = "Event Example", location = "Location Example", description = "Description Example", seats = 100)
+        val EVENT_EXAMPLE = Event(id = 0, ownerId = 0, name = "Event Example", location = "Location Example", description = "Description Example", seats = 100)
     }
 
-    @RequestMapping(value = ["/event"], method = [RequestMethod.POST])
+    /**
+     * Creeaza un eveniment nou.
+     * Returneaza 201 Created cu un header Location.
+     */
+    @PostMapping("/event")
     fun addEvent(@RequestBody event: Event): ResponseEntity<EntityModel<Event>> {
-        eventService.addEvent(event)
-        val json = buildHateoasModel(event) {
-            addManualLink(linkTo(EventController::class.java).slash("/event").withSelfRel())
+        val savedEvent = eventService.addEvent(event)
+
+        val json = buildHateoasModel(savedEvent) {
+            val selfLink = linkTo(EventController::class.java).slash("event").slash(savedEvent.id).withSelfRel()
+            addManualLink(selfLink)
             parent { methodOn(EventController::class.java).getEvents(null, null, null) }
         }
-        return ResponseEntity(json, HttpStatus.OK)
+
+        val locationUri = json.getLink("self").get().toUri()
+
+        // Returnam 201 Created
+        return ResponseEntity.created(locationUri).body(json)
     }
 
-    @RequestMapping("/events/{id}", method = [RequestMethod.GET])
+    /**
+     * Obtine un eveniment specific dupa ID.
+     */
+    @GetMapping("/events/{id}")
     fun getEvent(@PathVariable id: Int): ResponseEntity<EntityModel<Event>> {
         return try {
-            val event = eventService.getEvent(id).get()
+            val event = eventService.getEvent(id) // Arunca NoSuchElementException
             val eventModel = buildHateoasModel(event) {
-                addManualLink(linkTo(EventController::class.java).slash(id).withSelfRel())
+                addManualLink(linkTo(EventController::class.java).slash("events").slash(id).withSelfRel())
                 parent { methodOn(EventController::class.java).getEvents(null, null, null) }
             }
             ResponseEntity(eventModel, HttpStatus.OK)
-        } catch (e: Exception) {
+        } catch (_: NoSuchElementException) { // Prindem exceptia specifica
             val eventModel = buildHateoasModel(EVENT_EXAMPLE) {
-                addManualLink(linkTo(EventController::class.java).slash(id).withSelfRel())
+                addManualLink(linkTo(EventController::class.java).slash("events").slash(id).withSelfRel())
                 parent { methodOn(EventController::class.java).getEvents(null, null, null) }
             }
             ResponseEntity(eventModel, HttpStatus.NOT_FOUND)
@@ -53,74 +67,61 @@ open class EventController(private val eventService: EventService) {
     }
 
     /**
-     * Performs a search by substring of name, but if name is not provided, it will perform
-     * the search of events by location substring.
+     * Actualizeaza un eveniment existent.
      */
-    @RequestMapping("/events/", method = [RequestMethod.GET])
-    fun getEventByNameOrLocation(@RequestParam(required = false, defaultValue = "") name: String, @RequestParam(required = false, defaultValue = "") location: String): ResponseEntity<CollectionModel<EntityModel<DataObject>>> {
-        return try {
-            val events = eventService.getEventsByNameAndLocation(name, location)
-            val eventModel = buildHateoasCollection(events) {
-                addManualLink(linkTo(EventController::class.java).slash("").withSelfRel())
-                parent { methodOn(EventController::class.java).getEvents(null, null, null) }
-            }
-            ResponseEntity(eventModel, HttpStatus.OK)
-        } catch (e: Exception) {
-            val eventModel = buildHateoasCollection(mutableListOf()) {
-                addManualLink(linkTo(EventController::class.java).slash(location).withSelfRel())
-                parent { methodOn(EventController::class.java).getEvents(null, null, null) }
-            }
-            ResponseEntity(eventModel, HttpStatus.NOT_FOUND)
-        }
-    }
-
-    @RequestMapping(value = ["/events/{id}"], method = [RequestMethod.PUT])
+    @PutMapping("/events/{id}")
     fun updateEvent(@PathVariable id: Int, @RequestBody event: Event): ResponseEntity<EntityModel<Event>> {
         try {
-            event.ID = id
-            eventService.updateEvent(event)
+            event.id = id
+            eventService.updateEvent(event) // Poate arunca NoSuchElementException daca nu gaseste
             val json = buildHateoasModel(event) {
                 self { methodOn(EventController::class.java).getEvent(id) }
                 parent { methodOn(EventController::class.java).getEvents(null, null, null) }
             }
             return ResponseEntity.ok(json)
-        } catch (e: Exception) {
+        } catch (_: NoSuchElementException) { // Prindem exceptia specifica
             val json = buildHateoasModel(EVENT_EXAMPLE) {
-                self { methodOn(EventController::class.java).updateEvent(id, event) }
+                addManualLink(linkTo(EventController::class.java).slash("events").slash(id).withSelfRel())
                 parent { methodOn(EventController::class.java).getEvents(null, null, null) }
             }
             return ResponseEntity(json, HttpStatus.NOT_FOUND)
         }
     }
 
-    @RequestMapping(value = ["/events/{id}"], method = [RequestMethod.DELETE])
+    /**
+     * Sterge un eveniment existent.
+     */
+    @DeleteMapping("/events/{id}")
     fun deleteEvent(@PathVariable id: Int): ResponseEntity<EntityModel<Event>> {
         try {
-            val event = eventService.getEvent(id).get()
+            val event = eventService.getEvent(id) // Arunca NoSuchElementException
             eventService.deleteEvent(id)
             val json = buildHateoasModel(event) {
                 self { methodOn(EventController::class.java).getEvent(id) }
                 parent { methodOn(EventController::class.java).getEvents(null, null, null) }
             }
             return ResponseEntity(json, HttpStatus.OK)
-        } catch (e: Exception) {
+        } catch (_: NoSuchElementException) {
             val json = buildHateoasModel(EVENT_EXAMPLE) {
-                self { methodOn(EventController::class.java).deleteEvent(id) }
+                addManualLink(linkTo(EventController::class.java).slash("events").slash(id).withSelfRel())
                 parent { methodOn(EventController::class.java).getEvents(null, null, null) }
             }
             return ResponseEntity( json, HttpStatus.NOT_FOUND)
         }
     }
 
-    @RequestMapping(value = ["/events"], method = [RequestMethod.GET])
+    /**
+     * Obtine o lista de evenimente filtrate dupa parametri.
+     * Daca nu se gasesc, returneaza 200 OK cu o lista goala.
+     */
+    @GetMapping("/events")
     fun getEvents(@RequestParam(required=false) location: String?,
-                            @RequestParam(required=false) name: String?,
-                            @RequestParam(required=false) description: String?
+                  @RequestParam(required=false) name: String?,
+                  @RequestParam(required=false) description: String?
     ): ResponseEntity<CollectionModel<EntityModel<DataObject>>> {
         val events: List<Event> = eventService.getEventsByParameters(location, name, description)
         val json = buildHateoasCollection(events) {
-            addManualLink(linkTo(EventController::class.java).withSelfRel())
-            parent { methodOn(EventController::class.java).getEvents(null, null, null) }
+            addManualLink(linkTo(EventController::class.java).slash("events").withSelfRel())
         }
         return ResponseEntity(json, HttpStatus.OK)
     }

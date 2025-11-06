@@ -1,98 +1,151 @@
-//package com.pos.laborator.controllers
-//
-//import com.pos.laborator.model.EventRepository
-//import org.springframework.http.HttpStatus
-//import org.springframework.http.ResponseEntity
-//import org.springframework.web.bind.annotation.*
-//import com.pos.laborator.model.Ticket
-//import com.pos.laborator.utils.buildHateoasModel
-//import org.springframework.hateoas.EntityModel
-//import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn
-//
-///**
-// * OpenAPI Docs available after deployment at: http://localhost:8080/swagger-ui/index.html#/
-// */
-//
-//@RestController
-//@RequestMapping("/api/event-manager")
-//open class TicketController(private val packetService: EventRepository) {
-//
-//    companion object {
-//        val TICKET_EXAMPLE = Ticket(
-//            CODE = "Bilet0000",
-//            GroupID = 0,
-//            EventID = 0
-//        )
-//    }
-//
-//    @RequestMapping(value = ["/tickets/{cod}"], method = [RequestMethod.GET])
-//    fun getTicketByCode(@PathVariable cod: String): ResponseEntity<Ticket> {
-//        try {
-//            val ticket = database.getTicket(cod)
-//            return ResponseEntity.ok(ticket)
-//        } catch (e: Exception) {
-//            return ResponseEntity(HttpStatus.NOT_FOUND)
-//        }
-//    }
-//
-//    @RequestMapping(value = ["/events/{id}/tickets/{cod}"], method = [RequestMethod.GET])
-//    fun getTicketByEvent(@PathVariable id: Int, @PathVariable cod: String): ResponseEntity<EntityModel<Ticket>> {
-//        try {
-//            val response = eventService.getTicketByEventId(id, cod)
-//            val json = buildHateoasModel(response) {
-//                self { methodOn(EventController::class.java).getTicketByEvent(id, cod) }
-//                parent { methodOn(EventController::class.java).getEvent(id) }
-//            }
-//            return ResponseEntity(json, HttpStatus.OK)
-//        } catch (e: Exception) {
-//            val json = buildHateoasModel(TICKET_EXAMPLE) {
-//                self { methodOn(EventController::class.java).getEvent(id) }
-//                parent { methodOn(TicketController::class.java).getTickets() }
-//            }
-//            return ResponseEntity(json, HttpStatus.NOT_FOUND)
-//        }
-//    }
-//
-//
-//    @RequestMapping(value = ["/tickets/{cod}"], method = [RequestMethod.PUT])
-//    fun updateTicketByCode(@PathVariable cod: String, ticket: Ticket): ResponseEntity<Ticket> {
-//        val response = database.updateTicket(cod, ticket)
-//        return if (response) {
-//            ResponseEntity(HttpStatus.ACCEPTED)
-//        } else {
-//            ResponseEntity(HttpStatus.NOT_FOUND)
-//        }
-//    }
-//
-//    @RequestMapping(value = ["/tickets/{cod}"], method = [RequestMethod.PATCH])
-//    fun patchTicket(@PathVariable cod: String, eventId: Int, groupId: Int): ResponseEntity<Ticket> {
-//        val response = database.patchTicket(cod, eventId, groupId)
-//        return if (response) {
-//            ResponseEntity(HttpStatus.ACCEPTED)
-//        } else {
-//            ResponseEntity(HttpStatus.NOT_FOUND)
-//        }
-//    }
-//
-//    @RequestMapping(value = ["/tickets/{cod}"], method = [RequestMethod.DELETE])
-//    fun deleteTicketByCode(@PathVariable cod: String): ResponseEntity<Ticket> {
-//        val response = database.deleteTicket(cod)
-//        return if (response) {
-//            ResponseEntity(HttpStatus.OK)
-//        } else {
-//            ResponseEntity(HttpStatus.NOT_FOUND)
-//        }
-//    }
-//
-//    @RequestMapping(value = ["/tickets"], method = [RequestMethod.GET])
-//    fun getTickets(): ResponseEntity<List<Ticket>> {
-//        val tickets = database.tickets
-//        return ResponseEntity.ok(tickets)
-//    }
-//
-//    @RequestMapping(value = ["/ticket"], method = [RequestMethod.POST])
-//    fun addTicket(@RequestBody ticket: Ticket): ResponseEntity<Ticket> {
-//        database.addTicket(ticket)
-//        return ResponseEntity(HttpStatus.OK)
-//    }
-//}
+package com.pos.laborator.controllers
+
+import com.pos.laborator.interfaces.DataObject
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.*
+import com.pos.laborator.model.Ticket
+import com.pos.laborator.services.EventService
+import com.pos.laborator.services.PacketService
+import com.pos.laborator.services.TicketService
+import com.pos.laborator.utils.buildHateoasCollection
+import com.pos.laborator.utils.buildHateoasModel
+import org.springframework.hateoas.CollectionModel
+import org.springframework.hateoas.EntityModel
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn
+
+/**
+ * OpenAPI Docs available after deployment at: http://localhost:8080/swagger-ui/index.html#/
+ */
+
+@RestController
+@RequestMapping("/api/event-manager")
+open class TicketController(
+    private val ticketService: TicketService,
+    private val eventService: EventService,
+    private val packetService: PacketService
+) {
+
+    companion object {
+        val TICKET_EXAMPLE = Ticket(
+            code = "Bilet0000",
+            groupID = 0,
+            eventID = 0
+        )
+    }
+
+    @RequestMapping(value = ["/ticket"], method = [RequestMethod.POST])
+    fun addTicket(@RequestBody ticket: Ticket): ResponseEntity<EntityModel<Ticket>> {
+        val savedTicket = ticketService.addTicket(ticket)
+        val json = buildHateoasModel(savedTicket) {
+            val selfLink = linkTo(TicketController::class.java).slash(savedTicket.code).withSelfRel()
+            addManualLink(selfLink)
+            parent { methodOn(TicketController::class.java).getTickets() }
+        }
+
+        val locationUri = json.getLink("self").get().toUri()
+        return ResponseEntity.created(locationUri).body(json)
+    }
+
+    @RequestMapping(value = ["/tickets/{cod}"], method = [RequestMethod.GET])
+    fun getTicketByCode(@PathVariable cod: String): ResponseEntity<EntityModel<Ticket>> {
+        return try {
+            val ticket: Ticket = ticketService.getTicketByCode(cod)!!
+            val json = buildHateoasModel(ticket) {
+                addManualLink(linkTo(TicketController::class.java).slash("tickets/{cod}").withSelfRel())
+                parent { methodOn(TicketController::class.java).getTickets() }
+            }
+            ResponseEntity.ok(json)
+        } catch (_: NullPointerException) {
+            val json = buildHateoasModel(TICKET_EXAMPLE) {
+                addManualLink(linkTo(TicketController::class.java).slash("tickets/{cod}").withSelfRel())
+                parent { methodOn(TicketController::class.java).getTickets() }
+            }
+            ResponseEntity(json, HttpStatus.NOT_FOUND)
+        }
+    }
+
+    @RequestMapping(value = ["/events/{id}/tickets/{cod}"], method = [RequestMethod.GET])
+    fun getTicketByEvent(@PathVariable id: Int, @PathVariable cod: String): ResponseEntity<EntityModel<Ticket>> {
+        try {
+            val ticket: Ticket = ticketService.getTicketByCode(cod)!!
+            val json = buildHateoasModel(ticket) {
+                addManualLink(linkTo(TicketController::class.java).slash("/events/{id}tickets/{cod}").withSelfRel())
+                parent { methodOn(EventController::class.java).getEvent(id) }
+            }
+            return ResponseEntity(json, HttpStatus.OK)
+        } catch (_: Exception) {
+            val json = buildHateoasModel(TICKET_EXAMPLE) {
+                addManualLink(linkTo(TicketController::class.java).slash("/events/{id}tickets/{cod}").withSelfRel())
+                parent { methodOn(TicketController::class.java).getTickets() }
+            }
+            return ResponseEntity(json, HttpStatus.NOT_FOUND)
+        }
+    }
+
+    @RequestMapping(value = ["/tickets"], method = [RequestMethod.GET])
+    fun getTickets(): ResponseEntity<CollectionModel<EntityModel<DataObject>>> {
+        val tickets = ticketService.getAllTickets()
+        val json = buildHateoasCollection(tickets) {
+            addManualLink(linkTo(TicketController::class.java).slash("/events/{id}tickets/{cod}").withSelfRel())
+        }
+        return ResponseEntity(json, HttpStatus.OK)
+    }
+
+    @RequestMapping(value = ["/tickets/{cod}"], method = [RequestMethod.PUT])
+    fun updateTicketByCode(@PathVariable cod: String, ticket: Ticket): ResponseEntity<EntityModel<Ticket>> {
+        ticket.code = cod
+        val addedTicket = ticketService.addTicket(ticket)
+        return if (addedTicket != null) {
+            val json = buildHateoasModel(ticket) {
+                addManualLink(linkTo(TicketController::class.java).slash("/events/{id}tickets/{cod}").withSelfRel())
+                parent { methodOn(TicketController::class.java).getTickets() }
+            }
+            ResponseEntity(json, HttpStatus.OK)
+        } else {
+            val json = buildHateoasModel(TICKET_EXAMPLE) {
+                self { methodOn(TicketController::class.java).getTicketByCode(cod) }
+                parent { methodOn(TicketController::class.java).getTickets() }
+            }
+            return ResponseEntity(json, HttpStatus.NOT_FOUND)
+        }
+    }
+
+    @RequestMapping(value = ["/tickets/{cod}"], method = [RequestMethod.DELETE])
+    fun deleteTicket(@PathVariable cod: String): ResponseEntity<EntityModel<Ticket>> {
+        val ticket: Ticket? = ticketService.getTicketByCode(cod)
+        val deleted = ticketService.deleteTicket(cod)
+        val json = buildHateoasModel(ticket ?: TICKET_EXAMPLE) {
+            addManualLink(linkTo(TicketController::class.java).slash("/events/{id}tickets/{cod}").withSelfRel())
+            parent { methodOn(TicketController::class.java).getTickets() }
+        }
+        return if (deleted) {
+            ResponseEntity(json, HttpStatus.OK)
+        } else {
+            ResponseEntity(json, HttpStatus.GONE)
+        }
+    }
+
+    @RequestMapping(value = ["/event-packets/{packetId}/events"], method = [RequestMethod.GET])
+    fun getEventsByPacket(@PathVariable packetId: Int): ResponseEntity<CollectionModel<EntityModel<DataObject>>> {
+        val eventIds = ticketService.getAllTickets().filter { it.groupID == packetId }. map { it.eventID }
+        val events = eventService.getEventsByIds(eventIds)
+        val json = buildHateoasCollection(events) {
+            addManualLink(linkTo(TicketController::class.java).slash("/event-packets/{packetId}/events").withSelfRel())
+            parent { methodOn(EventPacketController::class.java).getEventPacket(packetId) }
+        }
+        return ResponseEntity(json, HttpStatus.OK)
+    }
+
+    @RequestMapping(value = ["/events/{id}/event-packets"], method = [RequestMethod.GET])
+    fun getEventPacketsByEventId(@PathVariable id: Int): ResponseEntity<CollectionModel<EntityModel<DataObject>>> {
+        val packetIds = ticketService.getAllTickets().filter { it.eventID == id }.map { it.groupID }
+        val packets = packetService.getPacketsByIds(packetIds)
+        val json = buildHateoasCollection(packets) {
+            self { methodOn(TicketController::class.java).getEventPacketsByEventId(id) }
+            parent { methodOn(EventController::class.java).getEvent(id) }
+        }
+        return ResponseEntity(json, HttpStatus.OK)
+    }
+}
