@@ -1,0 +1,36 @@
+@host = http://localhost:8080/api/event-manager
+
+### Get a single event (GET)
+GET {{host}}/events/1
+Accept: application/json
+
+### Get all events (GET)
+GET {{host}}/events
+Accept: application/json
+
+### Add a new event (POST)
+POST {{host}}/events
+Content-Type: application/json
+
+{
+  "ownerId": 1,
+  "name": "New Event From IntelliJ",
+  "location": "IntelliJ HTTP Client",
+  "description": "Testing POST request",
+  "seats": 150
+}
+
+### Update an event (PUT)
+PUT {{host}}/events/1
+Content-Type: application/json
+
+{
+  "ownerId": 1,
+  "name": "Updated Event Name",
+  "location": "Updated Location",
+  "description": "Testing PUT request",
+  "seats": 200
+}
+
+### Delete an event (DELETE)
+DELETE {{host}}/events/1
