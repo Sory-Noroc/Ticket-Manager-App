@@ -1,0 +1,348 @@
+{
+	"info": {
+		"_postman_id": "05e04123-4d53-486b-b112-3ce1b498cfbb",
+		"name": "POS_Events",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44852143",
+		"_collection_link": "https://tomsaywer.postman.co/workspace/Tom-Saywer's-Workspace~70bd0d2a-49c9-4e08-8ff9-31a8735af7fc/collection/44852143-05e04123-4d53-486b-b112-3ce1b498cfbb?action=share&source=collection_link&creator=44852143"
+	},
+	"item": [
+		{
+			"name": "POST event",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ID_OWNER\": 1,\r\n    \"name\": \"Nunta\",\r\n    \"location\": \"Falesti\",\r\n    \"description\": \"Very good\",\r\n    \"seats\": 100\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/event-manager/event",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"event-manager",
+						"event"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET event by id",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/event-manager/events/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"event-manager",
+						"events",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET event by id NotFound",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/event-manager/events/100",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"event-manager",
+						"events",
+						"100"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Update event",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ID_OWNER\": 1,\r\n    \"name\": \"Test Put\",\r\n    \"location\": \"Iasi\",\r\n    \"description\": \"Descrierea a functionat.\",\r\n    \"seats\": 100\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/event-manager/events/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"event-manager",
+						"events",
+						"1"
+					],
+					"query": [
+						{
+							"key": "location",
+							"value": "Falesti",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Update event Can't create new",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ID_OWNER\": 1,\r\n    \"name\": \"Test Put\",\r\n    \"location\": \"Iasi\",\r\n    \"description\": \"Descrierea a functionat.\",\r\n    \"seats\": 100\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/event-manager/events/107",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"event-manager",
+						"events",
+						"107"
+					],
+					"query": [
+						{
+							"key": "location",
+							"value": "Falesti",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DEL Delete event",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/event-manager/events/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"event-manager",
+						"events",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DEL Delete cant delete nonexistent Copy",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/event-manager/events/100",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"event-manager",
+						"events",
+						"100"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET all events OK",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/event-manager/events",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"event-manager",
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET by parameters",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/event-manager/events?name=Test&description=functionat",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"event-manager",
+						"events"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Test"
+						},
+						{
+							"key": "description",
+							"value": "functionat"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET by bad parameters - empty",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/event-manager/events?name=fdsasfas&description=sdfasfas&location=safsdfdas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"event-manager",
+						"events"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "fdsasfas"
+						},
+						{
+							"key": "description",
+							"value": "sdfasfas"
+						},
+						{
+							"key": "location",
+							"value": "safsdfdas"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
