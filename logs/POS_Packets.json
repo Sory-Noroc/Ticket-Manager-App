@@ -1,0 +1,291 @@
+{
+	"info": {
+		"_postman_id": "76837c22-1a10-4747-93ee-57602631e27e",
+		"name": "POS_Packets",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44852143",
+		"_collection_link": "https://tomsaywer.postman.co/workspace/Tom-Saywer's-Workspace~70bd0d2a-49c9-4e08-8ff9-31a8735af7fc/collection/44852143-76837c22-1a10-4747-93ee-57602631e27e?action=share&source=collection_link&creator=44852143"
+	},
+	"item": [
+		{
+			"name": "POST add packet 201",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ownerId\": 10,\r\n    \"name\": \"Pachet Nunti\",\r\n    \"location\": \"Iasi\",\r\n    \"description\": \"Mergi la 3 nunti la pret de 1!!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/event-manager/event-packets",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"event-manager",
+						"event-packets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET get packet 200 OK",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/event-manager/event-packets/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"event-manager",
+						"event-packets",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET get nonexistent packet 404",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/event-manager/event-packets/1264",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"event-manager",
+						"event-packets",
+						"1264"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET get all packets",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/event-manager/event-packets",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"event-manager",
+						"event-packets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET get all packets by type",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/event-manager/event-packets?type=nunti",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"event-manager",
+						"event-packets"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "nunti"
+						},
+						{
+							"key": "availableTickets",
+							"value": "1",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Update packet",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ownerId\": 5,\r\n    \"name\": \"Pachet Nunti\",\r\n    \"location\": \"Sibiu\",\r\n    \"description\": \"Mergi la 3 nunti la pret de 1!!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/event-manager/event-packets/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"event-manager",
+						"event-packets",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DEL packet OK",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/event-manager/event-packets/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"event-manager",
+						"event-packets",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DEL packet 404",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/event-manager/event-packets/10",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"event-manager",
+						"event-packets",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET packet for event {id} OK",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/event-manager/events/1/event-packets",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"event-manager",
+						"events",
+						"1",
+						"event-packets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET packets for event {id} OK",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/event-manager/event-packets/1/events",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"event-manager",
+						"event-packets",
+						"1",
+						"events"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

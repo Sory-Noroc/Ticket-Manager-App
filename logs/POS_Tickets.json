@@ -1,0 +1,200 @@
+{
+	"info": {
+		"_postman_id": "46067a7c-82fd-4307-90e1-e5632867c736",
+		"name": "POS_Tickets",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44852143",
+		"_collection_link": "https://tomsaywer.postman.co/workspace/Tom-Saywer's-Workspace~70bd0d2a-49c9-4e08-8ff9-31a8735af7fc/collection/44852143-46067a7c-82fd-4307-90e1-e5632867c736?action=share&source=collection_link&creator=44852143"
+	},
+	"item": [
+		{
+			"name": "POST ticket 201",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code\": null,\r\n    \"groupID\": 1,\r\n    \"eventID\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/event-manager/ticket",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"event-manager",
+						"ticket"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET ticket OK",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/event-manager/tickets/5o1MzwyKOqUnzwKZ",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"event-manager",
+						"tickets",
+						"5o1MzwyKOqUnzwKZ"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET tickets from eventID 200",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/event-manager/events/1/tickets/5o1MzwyKOqUnzwKZ",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"event-manager",
+						"events",
+						"1",
+						"tickets",
+						"5o1MzwyKOqUnzwKZ"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET all tickets",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/event-manager/tickets",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"event-manager",
+						"tickets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT update ticket",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code\": null,\r\n    \"groupID\": 10,\r\n    \"eventID\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/event-manager/tickets/uUB7yaONmgi9KwPD",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"event-manager",
+						"tickets",
+						"uUB7yaONmgi9KwPD"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE ticket by id OK",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/event-manager/tickets/uUB7yaONmgi9KwPD",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"event-manager",
+						"tickets",
+						"uUB7yaONmgi9KwPD"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
