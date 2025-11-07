@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository
 interface TicketRepository: CrudRepository<Ticket, String> {
 
     fun getTicketByCode(code: String): Ticket?
-    fun getTicketByEventID(eventId: Int): Ticket?
-    fun getTicketByGroupID(groupId: Int): Ticket?
+    fun getTicketsByEventID(eventId: Int): List<Ticket>
+    fun getTicketsByGroupID(groupId: Int): List<Ticket>
 }

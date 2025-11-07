@@ -5,20 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="400e8ed3-3534-47fc-bb2b-220025ebffb9" name="Changes" comment="First commit. Half of project">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/repositories/TicketRepository.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/services/PacketService.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/services/TicketService.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/event.http" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/controllers/EventController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/controllers/EventController.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/controllers/EventPacketController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/controllers/EventPacketController.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/controllers/TicketController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/controllers/TicketController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/model/Event.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/model/Event.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/model/Packet.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/model/Packet.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/model/Ticket.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/model/Ticket.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/repositories/PacketRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/repositories/PacketRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/services/EventService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/services/EventService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/pos/laborator/model/RepositoryTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/pos/laborator/model/RepositoryTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/repositories/TicketRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/repositories/TicketRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/services/TicketService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/services/TicketService.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,6 +68,7 @@
     &quot;Maven.EventAPI [compile].executor&quot;: &quot;Run&quot;,
     &quot;Maven.EventAPI [install].executor&quot;: &quot;Run&quot;,
     &quot;Maven.EventAPI [org.apache.maven.plugins:maven-clean-plugin:3.4.0:clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.EventAPI [spring-boot:stop,clean,install...].executor&quot;: &quot;Run&quot;,
     &quot;Maven.EventAPI [validate].executor&quot;: &quot;Run&quot;,
     &quot;Maven.EventService [clean,install].executor&quot;: &quot;Run&quot;,
     &quot;Maven.EventService [clean].executor&quot;: &quot;Run&quot;,
@@ -137,6 +132,7 @@
     <option name="myCommands">
       <command value="mvn clean compile" />
       <command value="mvn clean install" />
+      <command value="mvn spring-boot:stop clean install spring-boot:run" />
       <command value="mvn clean install spring-boot:run" />
     </option>
   </component>
@@ -289,6 +285,9 @@
       <workItem from="1762195217238" duration="9563000" />
       <workItem from="1762266638518" duration="26347000" />
       <workItem from="1762372645710" duration="4000" />
+      <workItem from="1762435966852" duration="5249000" />
+      <workItem from="1762441672631" duration="7737000" />
+      <workItem from="1762510376402" duration="5355000" />
     </task>
     <task id="LOCAL-00001" summary="First commit. Half of project">
       <option name="closed" value="true" />

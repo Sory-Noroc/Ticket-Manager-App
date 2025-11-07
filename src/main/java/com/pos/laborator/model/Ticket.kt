@@ -15,7 +15,6 @@ import java.util.Base64
 @Relation(collectionRelation = "tickets")
 data class Ticket(
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     var code: String? = null,
     var groupID: Int,
     var eventID: Int

@@ -12,6 +12,7 @@ import org.springframework.hateoas.CollectionModel
 import org.springframework.hateoas.EntityModel
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn
+import org.springframework.orm.ObjectOptimisticLockingFailureException
 import java.util.NoSuchElementException
 
 /**
@@ -79,12 +80,12 @@ class EventController(private val eventService: EventService) {
                 parent { methodOn(EventController::class.java).getEvents(null, null, null) }
             }
             return ResponseEntity.ok(json)
-        } catch (_: NoSuchElementException) { // Prindem exceptia specifica
+        } catch (_: ObjectOptimisticLockingFailureException) {
             val json = buildHateoasModel(EVENT_EXAMPLE) {
                 addManualLink(linkTo(EventController::class.java).slash("events").slash(id).withSelfRel())
                 parent { methodOn(EventController::class.java).getEvents(null, null, null) }
             }
-            return ResponseEntity(json, HttpStatus.NOT_FOUND)
+            return ResponseEntity(json, HttpStatus.NOT_ACCEPTABLE)
         }
     }
 

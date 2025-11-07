@@ -14,6 +14,7 @@ import org.springframework.hateoas.CollectionModel
 import org.springframework.hateoas.EntityModel
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder.json
 
 /**
  * OpenAPI Docs available after deployment at: http://localhost:8080/swagger-ui/index.html#/
@@ -22,9 +23,7 @@ import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn
 @RestController
 @RequestMapping("/api/event-manager")
 open class TicketController(
-    private val ticketService: TicketService,
-    private val eventService: EventService,
-    private val packetService: PacketService
+    private val ticketService: TicketService
 ) {
 
     companion object {
@@ -67,20 +66,23 @@ open class TicketController(
     }
 
     @RequestMapping(value = ["/events/{id}/tickets/{cod}"], method = [RequestMethod.GET])
-    fun getTicketByEvent(@PathVariable id: Int, @PathVariable cod: String): ResponseEntity<EntityModel<Ticket>> {
+    fun getTicketsByEvent(@PathVariable id: Int, @PathVariable cod: String): ResponseEntity<EntityModel<Ticket>> {
+        var json = buildHateoasModel(TICKET_EXAMPLE) {
+            addManualLink(linkTo(TicketController::class.java).slash("/events/{id}tickets/{cod}").withSelfRel())
+            parent { methodOn(TicketController::class.java).getTickets() }
+        }
         try {
-            val ticket: Ticket = ticketService.getTicketByCode(cod)!!
-            val json = buildHateoasModel(ticket) {
+            val ticket = ticketService.getTicketByEvent(id, cod)
+            json = buildHateoasModel(ticket) {
                 addManualLink(linkTo(TicketController::class.java).slash("/events/{id}tickets/{cod}").withSelfRel())
                 parent { methodOn(EventController::class.java).getEvent(id) }
             }
             return ResponseEntity(json, HttpStatus.OK)
-        } catch (_: Exception) {
-            val json = buildHateoasModel(TICKET_EXAMPLE) {
-                addManualLink(linkTo(TicketController::class.java).slash("/events/{id}tickets/{cod}").withSelfRel())
-                parent { methodOn(TicketController::class.java).getTickets() }
-            }
+        } catch (e: NoSuchElementException) {
+            // No such event
             return ResponseEntity(json, HttpStatus.NOT_FOUND)
+        } catch (e: IndexOutOfBoundsException) {
+            return ResponseEntity(json, HttpStatus.BAD_REQUEST)
         }
     }
 
@@ -96,7 +98,7 @@ open class TicketController(
     @RequestMapping(value = ["/tickets/{cod}"], method = [RequestMethod.PUT])
     fun updateTicketByCode(@PathVariable cod: String, ticket: Ticket): ResponseEntity<EntityModel<Ticket>> {
         ticket.code = cod
-        val addedTicket = ticketService.addTicket(ticket)
+        val addedTicket = ticketService.updateTicket(ticket)
         return if (addedTicket != null) {
             val json = buildHateoasModel(ticket) {
                 addManualLink(linkTo(TicketController::class.java).slash("/events/{id}tickets/{cod}").withSelfRel())
@@ -125,27 +127,5 @@ open class TicketController(
         } else {
             ResponseEntity(json, HttpStatus.GONE)
         }
-    }
-
-    @RequestMapping(value = ["/event-packets/{packetId}/events"], method = [RequestMethod.GET])
-    fun getEventsByPacket(@PathVariable packetId: Int): ResponseEntity<CollectionModel<EntityModel<DataObject>>> {
-        val eventIds = ticketService.getAllTickets().filter { it.groupID == packetId }. map { it.eventID }
-        val events = eventService.getEventsByIds(eventIds)
-        val json = buildHateoasCollection(events) {
-            addManualLink(linkTo(TicketController::class.java).slash("/event-packets/{packetId}/events").withSelfRel())
-            parent { methodOn(EventPacketController::class.java).getEventPacket(packetId) }
-        }
-        return ResponseEntity(json, HttpStatus.OK)
-    }
-
-    @RequestMapping(value = ["/events/{id}/event-packets"], method = [RequestMethod.GET])
-    fun getEventPacketsByEventId(@PathVariable id: Int): ResponseEntity<CollectionModel<EntityModel<DataObject>>> {
-        val packetIds = ticketService.getAllTickets().filter { it.eventID == id }.map { it.groupID }
-        val packets = packetService.getPacketsByIds(packetIds)
-        val json = buildHateoasCollection(packets) {
-            self { methodOn(TicketController::class.java).getEventPacketsByEventId(id) }
-            parent { methodOn(EventController::class.java).getEvent(id) }
-        }
-        return ResponseEntity(json, HttpStatus.OK)
     }
 }
