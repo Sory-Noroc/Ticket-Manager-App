@@ -1,11 +1,14 @@
+from typing import List
+
 from fastapi import FastAPI, HTTPException, Depends
 from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
+
 from model.ClientModel import ClientModel
 from model.TicketModel import TicketModel, EventInfo
 import os
 import httpx
 
-MONGO_DETAILS = os.environ.get("MONGO_DETAILS", "mongodb://localhost:27017")
+MONGO_DETAILS = os.environ.get("MONGO_DETAILS", "mongodb://host.docker.internal:27017")
 db_client: AsyncIOMotorClient
 
 def get_database() -> AsyncIOMotorDatabase:
@@ -25,7 +28,7 @@ app = FastAPI(title="ClientAPI")
 app.add_event_handler("startup", connect_to_mongo)
 app.add_event_handler("shutdown", close_mongo_connection)
 
-EVENT_API_BASE_URL = os.environ.get("EVENT_API_BASE_URL", "http://localhost:8080") + "/api/event-manager"
+EVENT_API_BASE_URL = os.environ.get("EVENT_API_BASE_URL", "http://host.docker.internal:8080") + "/api/event-manager"
 
 
 @app.post("/clients", response_model=ClientModel, status_code=201)
@@ -36,6 +39,11 @@ async def create_client(client: ClientModel, db: AsyncIOMotorDatabase = Depends(
     client_dict = client.model_dump()
     await db.clients.insert_one(client_dict)
     return client
+
+@app.get("/clients", response_model=List[ClientModel])
+async def get_clients(db: AsyncIOMotorDatabase = Depends(get_database)):
+    clients = await db.clients.find().to_list(length=100)
+    return [ClientModel(**client) for client in clients]
 
 
 @app.get("/clients/{email}", response_model=ClientModel)
