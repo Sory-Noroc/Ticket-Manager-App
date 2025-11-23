@@ -1,8 +1,6 @@
 from typing import List
-
 from fastapi import FastAPI, HTTPException, Depends
 from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
-
 from model.ClientModel import ClientModel
 from model.TicketModel import TicketModel, EventInfo
 import os
@@ -35,10 +33,10 @@ EVENT_API_BASE_URL = os.environ.get("EVENT_API_BASE_URL", "http://host.docker.in
 async def create_client(client: ClientModel, db: AsyncIOMotorDatabase = Depends(get_database)):
     if await db.clients.find_one({"email": client.email}):
         raise HTTPException(status_code=405, detail="Client with this email already exists")
-    
     client_dict = client.model_dump()
     await db.clients.insert_one(client_dict)
     return client
+
 
 @app.get("/clients", response_model=List[ClientModel])
 async def get_clients(db: AsyncIOMotorDatabase = Depends(get_database)):
