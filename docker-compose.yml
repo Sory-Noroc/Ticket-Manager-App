@@ -1,0 +1,70 @@
+version: '3.8'
+services:
+
+  pos-frontend:
+    container_name: pos-frontend
+    build:
+      ./frontend
+    ports:
+      - "5173:5173"
+    volumes:
+     - ./frontend:/app
+     - /app/node_modules
+    environment:
+      NODE_ENV: development
+      stdin_open: true
+      tty: true
+    # ONLY DEVELOPMENT!
+    command: npm run dev
+
+  auth-api:
+    image: ./AuthAPI
+    ports:
+     - "9090:9090"
+    depends_on:
+      - mariadb
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  mariadb:
+    image: mariadb:latest
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: pos_project
+    volumes:
+      - mariadb-data:/var/lib/mysql
+
+  client-api:
+    build: ./ClientAPI
+    ports:
+      - "80:80"
+    depends_on:
+      - mongo
+      - event-api
+    environment:
+      - MONGO_DETAILS=mongodb://mongo:27017
+      - EVENT_API_BASE_URL=http://event-api:8080
+
+  event-api:
+    build: ./EventAPI
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mariadb
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mariadb://mariadb:3306/pos_project
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=rootpassword
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+volumes:
+  mongo-data:
+  mariadb-data:
+  node_modules: {}
