@@ -35,7 +35,7 @@ class TicketService(
 
     fun addTicket(ticket: Ticket) = ticketRepo.save(createNewTicket(ticket))
 
-    fun updateTicket(ticket: Ticket): Ticket = ticketRepo.save(ticket)
+    fun updateTicket(ticket: Ticket): Ticket? = ticketRepo.save(ticket)
 
     fun getTicketByCode(code: String) = ticketRepo.getTicketByCode(code)
 

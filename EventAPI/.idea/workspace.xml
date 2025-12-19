@@ -5,9 +5,61 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="400e8ed3-3534-47fc-bb2b-220025ebffb9" name="Changes" comment="Event/packet/ticket endpoints finished">
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AuthAPI/client.py" beforeDir="false" afterPath="$PROJECT_DIR$/../AuthAPI/client.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AuthAPI/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/../AuthAPI/database.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AuthAPI/protos/auth.proto" beforeDir="false" afterPath="$PROJECT_DIR$/../AuthAPI/protos/auth.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AuthAPI/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/../AuthAPI/server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ClientAPI/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../ClientAPI/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ClientAPI/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ClientAPI/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ClientAPI/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../ClientAPI/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/kotlinc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/controllers/TicketController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/controllers/TicketController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/model/Ticket.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/model/Ticket.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/Main.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/controllers/EventPacketController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/controllers/EventPacketController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/services/PacketService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/services/PacketService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/services/TicketService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/services/TicketService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/.editorconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/angular.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/public/ticket_background.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/app.config.server.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/app.config.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/app.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/app.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/app.routes.server.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/app.routes.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/app.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/app.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/dashboard/dashboard.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/dashboard/dashboard.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/dashboard/dashboard.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/dashboard/dashboard.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/login/login.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/login/login.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/login/login.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/navbar/navbar.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/navbar/navbar.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/navbar/navbar.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/custom-theme.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/main.server.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/main.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/server.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/styles.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/tsconfig.app.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/tsconfig.spec.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +77,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HttpClientOnboardingState">{
   &quot;isOnboardingCommentShown&quot;: true
@@ -34,6 +86,9 @@
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 2
@@ -43,65 +98,72 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;HTTP Request.All in event.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.DatabaseTest.addEvent.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.DatabaseTest.getEventsByLocation.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.DatabaseTest.getEventsByParameters.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.EventRepositoryTest.updateData.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.UserRepositoryTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.UserRepositoryTest.testAddData.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.UserRepositoryTest.testFetchByLocationSubstring.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.UserRepositoryTest.testFetchData.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.UserRepositoryTest.testFetchFirstElement.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.UserRepositoryTest.testFindSimilarEvent.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.EventAPI [clean,compile].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.EventAPI [clean,install,spring-boot:run].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.EventAPI [clean,install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.EventAPI [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.EventAPI [compile].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.EventAPI [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.EventAPI [org.apache.maven.plugins:maven-clean-plugin:3.4.0:clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.EventAPI [spring-boot:stop,clean,install...].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.EventAPI [validate].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.EventService [clean,install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.EventService [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.EventService [compile].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.EventService [deploy].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.EventService [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.EventService [org.apache.maven.plugins:maven-clean-plugin:3.4.0:clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.EventService [org.springframework.boot:spring-boot-maven-plugin:3.4.2:run].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.EventService [package].executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;OpenRewrite.UpgradeSpringBoot_2_0.executor&quot;: &quot;Run&quot;,
-    &quot;OpenRewrite.UpgradeSpringBoot_2_5.executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Spring Boot.EventAPI.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.EventService.executor&quot;: &quot;Run&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;proiect&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.folding&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Docker.Dockerfile.executor": "Run",
+    "HTTP Request.All in event.executor": "Run",
+    "JUnit.DatabaseTest.addEvent.executor": "Run",
+    "JUnit.DatabaseTest.getEventsByLocation.executor": "Run",
+    "JUnit.DatabaseTest.getEventsByParameters.executor": "Run",
+    "JUnit.EventRepositoryTest.updateData.executor": "Run",
+    "JUnit.UserRepositoryTest.executor": "Run",
+    "JUnit.UserRepositoryTest.testAddData.executor": "Run",
+    "JUnit.UserRepositoryTest.testFetchByLocationSubstring.executor": "Run",
+    "JUnit.UserRepositoryTest.testFetchData.executor": "Run",
+    "JUnit.UserRepositoryTest.testFetchFirstElement.executor": "Run",
+    "JUnit.UserRepositoryTest.testFindSimilarEvent.executor": "Run",
+    "Maven.EventAPI [clean,compile].executor": "Run",
+    "Maven.EventAPI [clean,install,spring-boot:run].executor": "Run",
+    "Maven.EventAPI [clean,install].executor": "Run",
+    "Maven.EventAPI [clean].executor": "Run",
+    "Maven.EventAPI [compile].executor": "Run",
+    "Maven.EventAPI [install].executor": "Run",
+    "Maven.EventAPI [org.apache.maven.plugins:maven-clean-plugin:3.4.0:clean].executor": "Run",
+    "Maven.EventAPI [spring-boot:stop,clean,install...].executor": "Run",
+    "Maven.EventAPI [validate].executor": "Run",
+    "Maven.EventService [clean,install].executor": "Run",
+    "Maven.EventService [clean].executor": "Run",
+    "Maven.EventService [compile].executor": "Run",
+    "Maven.EventService [deploy].executor": "Run",
+    "Maven.EventService [install].executor": "Run",
+    "Maven.EventService [org.apache.maven.plugins:maven-clean-plugin:3.4.0:clean].executor": "Run",
+    "Maven.EventService [org.springframework.boot:spring-boot-maven-plugin:3.4.2:run].executor": "Run",
+    "Maven.EventService [package].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "OpenRewrite.UpgradeSpringBoot_2_0.executor": "Run",
+    "OpenRewrite.UpgradeSpringBoot_2_5.executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.EventAPI.executor": "Run",
+    "Spring Boot.EventService.executor": "Run",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "proiect",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/Uni/Anul 4/Semestru 1/POS/PROIECT/EventAPI",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="QodanaReportsService">
+    <option name="descriptions">
+      <ReportDescription localRun="true" path="C:\Users\sorin\AppData\Local\Temp\qodana_output\qodana.sarif.json" reportGuid="17a2b635-2a2f-45f4-af8b-8acd9f276cd8" reportId="EventAPI/qodana/2025-12-19" />
+    </option>
+  </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Uni\Anul 4\Semestru 1\POS\PROIECT\eventService\src\main\java\com\pos\laborator" />
@@ -144,7 +206,7 @@
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.EventAPI">
+  <component name="RunManager" selected="Docker.Dockerfile">
     <configuration name="All in event" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$PROJECT_DIR$/src/test/event.http">
       <method v="2" />
     </configuration>
@@ -159,22 +221,6 @@
       <option name="PACKAGE_NAME" value="com.pos.laborator.model" />
       <option name="MAIN_CLASS_NAME" value="com.pos.laborator.model.EventRepositoryTest" />
       <option name="METHOD_NAME" value="updateData" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="UserRepositoryTest.testAddData" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="EventAPI" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.pos.laborator.model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.pos.laborator.model" />
-      <option name="MAIN_CLASS_NAME" value="com.pos.laborator.model.UserRepositoryTest" />
-      <option name="METHOD_NAME" value="testAddData" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -218,13 +264,27 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="sourceFilePath" value="Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
+      <deployment type="dockerfile">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Docker.Dockerfile" />
         <item itemvalue="HTTP Request.All in event" />
         <item itemvalue="Spring Boot.EventService" />
         <item itemvalue="JUnit.EventRepositoryTest.updateData" />
         <item itemvalue="JUnit.UserRepositoryTest.testFindSimilarEvent" />
-        <item itemvalue="JUnit.UserRepositoryTest.testAddData" />
       </list>
     </recent_temporary>
   </component>
@@ -284,6 +344,17 @@
       <workItem from="1762441672631" duration="7737000" />
       <workItem from="1762510376402" duration="6073000" />
       <workItem from="1762540636584" duration="1589000" />
+      <workItem from="1762877767811" duration="605000" />
+      <workItem from="1762885592956" duration="2000" />
+      <workItem from="1762982352928" duration="413000" />
+      <workItem from="1763014498659" duration="3000" />
+      <workItem from="1765001604134" duration="3942000" />
+      <workItem from="1765181341601" duration="4000" />
+      <workItem from="1765982916243" duration="15835000" />
+      <workItem from="1766051750490" duration="7000" />
+      <workItem from="1766139474239" duration="4371000" />
+      <workItem from="1766175172607" duration="531000" />
+      <workItem from="1766176154826" duration="3597000" />
     </task>
     <task id="LOCAL-00001" summary="First commit. Half of project">
       <option name="closed" value="true" />
@@ -308,8 +379,15 @@
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$" />
+    </ignored-roots>
     <MESSAGE value="First commit. Half of project" />
     <MESSAGE value="Event/packet/ticket endpoints finished" />
     <option name="LAST_COMMIT_MESSAGE" value="Event/packet/ticket endpoints finished" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

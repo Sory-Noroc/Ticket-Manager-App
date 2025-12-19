@@ -8,21 +8,6 @@ import datetime
 from dotenv import load_dotenv
 import protos.auth_pb2 as auth_pb2
 import protos.auth_pb2_grpc as auth_pb2_grpc
-
-load_dotenv()
-
-# python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. protos/auth.proto
-
-import grpc
-from concurrent import futures
-import time
-import os
-import hashlib
-import jwt
-import datetime
-from dotenv import load_dotenv
-import protos.auth_pb2 as auth_pb2
-import protos.auth_pb2_grpc as auth_pb2_grpc
 import database
 
 load_dotenv()
@@ -90,7 +75,7 @@ class AuthService(auth_pb2_grpc.AuthServiceServicer):
             return auth_pb2.ValidateResponse(valid=False, error="Token expired")
         except jwt.InvalidTokenError:
             return auth_pb2.ValidateResponse(valid=False, error="Invalid token")
-    
+
     def InvalidateToken(self, request, context):
         self.blocklist.add(request.token)
         return auth_pb2.InvalidateResponse(success=True)

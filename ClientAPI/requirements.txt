@@ -3,3 +3,6 @@ fastapi==0.121.1
 motor==3.7.1
 httpx==0.28.1
 uvicorn==0.38.0
+grpcio==1.65.1
+grpcio-tools==1.65.1
+protobuf==5.26.1

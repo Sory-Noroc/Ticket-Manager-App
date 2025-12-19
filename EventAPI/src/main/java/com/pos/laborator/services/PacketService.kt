@@ -13,9 +13,9 @@ class PacketService(
     private val eventService: EventService
 ) {
 
-    fun addPacket(packet: Packet) = packetRepo.save(packet)
+    fun addPacket(packet: Packet): Packet = packetRepo.save(packet)
 
-    fun getPacket(id: Int) = packetRepo.findById(id).orElse(null)
+    fun getPacket(id: Int): Packet? = packetRepo.findById(id).orElse(null)
 
     fun updatePacket(packet: Packet) {
         packetRepo.save(packet)

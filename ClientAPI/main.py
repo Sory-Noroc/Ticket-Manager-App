@@ -1,13 +1,26 @@
-from typing import List
-from fastapi import FastAPI, HTTPException, Depends
+from typing import List, Optional
+from fastapi import FastAPI, HTTPException, Depends, Header
 from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
 from model.ClientModel import ClientModel
 from model.TicketModel import TicketModel, EventInfo
+from auth_client import validate_token
 import os
 import httpx
 
 MONGO_DETAILS = os.environ.get("MONGO_DETAILS", "mongodb://host.docker.internal:27017")
 db_client: AsyncIOMotorClient
+
+async def verify_token(authorization: Optional[str] = Header(None)):
+    if authorization is None:
+        raise HTTPException(status_code=401, detail="Authorization header missing")
+    
+    parts = authorization.split()
+    if len(parts) != 2 or parts[0].lower() != "bearer":
+        raise HTTPException(status_code=401, detail="Invalid Authorization header format")
+
+    token = parts[1]
+    if not validate_token(token):
+        raise HTTPException(status_code=401, detail="Invalid or expired token")
 
 def get_database() -> AsyncIOMotorDatabase:
     return db_client.pos_project
@@ -38,7 +51,7 @@ async def create_client(client: ClientModel, db: AsyncIOMotorDatabase = Depends(
     return client
 
 
-@app.get("/clients", response_model=List[ClientModel])
+@app.get("/clients", response_model=List[ClientModel], dependencies=[Depends(verify_token)])
 async def get_clients(db: AsyncIOMotorDatabase = Depends(get_database)):
     clients = await db.clients.find().to_list(length=100)
     return [ClientModel(**client) for client in clients]

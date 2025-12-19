@@ -51,7 +51,7 @@ class EventPacketController(
     @GetMapping("/event-packets/{packetId}")
     fun getEventPacket(@PathVariable packetId: Int): ResponseEntity<EntityModel<Packet>> {
         return try {
-            val packet = packetService.getPacket(packetId)
+            val packet = packetService.getPacket(packetId)!!
             val json = buildHateoasModel(packet) {
                 addManualLink(linkTo(EventPacketController::class.java).slash(packetId).withSelfRel())
                 parent { methodOn(EventPacketController::class.java).getEventPackets(null, null) }
@@ -89,7 +89,7 @@ class EventPacketController(
     fun updateEventPacket(@PathVariable packetId: Int, @RequestBody packet: Packet): ResponseEntity<EntityModel<Packet>> {
         packet.id = packetId
         packetService.updatePacket(packet)
-        val updatedPacket = packetService.getPacket(packetId)
+        val updatedPacket = packetService.getPacket(packetId)!!
         val json = buildHateoasModel(updatedPacket) {
             self { methodOn(EventPacketController::class.java).getEventPacket(packetId) }
             parent { methodOn(EventPacketController::class.java).getEventPackets(null, null) }
@@ -103,7 +103,7 @@ class EventPacketController(
     @DeleteMapping("/event-packets/{packetId}")
     fun deleteEventPacket(@PathVariable packetId: Int): ResponseEntity<EntityModel<Packet>> {
         return try {
-            val packet = packetService.getPacket(packetId)
+            val packet = packetService.getPacket(packetId)!!
             packetService.deletePacket(packetId)
 
             val json = buildHateoasModel(packet) {

@@ -15,10 +15,10 @@ def run():
         ))
         print(f"Register Success: {response.success}, Message: {response.message}")
 
-        print("\n--- Logging in as user1 ---")
+        print("\n--- Logging in as the registered user ---")
         response = stub.Login(auth_pb2.LoginRequest(
-            username="user1",
-            password="password123"
+            username="newuser",
+            password="newpassword"
         ))
         if response.token:
             print(f"Login Successful. Token: {response.token}")
