@@ -22,7 +22,7 @@ import kotlin.jvm.optionals.getOrNull
 
 @RestController
 @RequestMapping("/api/event-manager")
-class TicketController(
+open class TicketController(
     private var ticketService: TicketService
 ) {
 
@@ -103,7 +103,7 @@ class TicketController(
         } catch (_: IndexOutOfBoundsException) {
             return ResponseEntity(json, HttpStatus.BAD_REQUEST)
         } catch (_: Exception) {
-            // No such event
+            // Nu avem asa event
             return ResponseEntity(json, HttpStatus.NOT_FOUND)
         }
     }

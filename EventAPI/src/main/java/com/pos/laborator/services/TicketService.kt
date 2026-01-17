@@ -30,7 +30,7 @@ class TicketService(
         } while (!isCodeUnique)
 
         ticket.code = newCode
-        return ticketRepo.save(ticket)
+        return ticket
     }
 
     fun addTicket(ticket: Ticket): Ticket = ticketRepo.save(createNewTicket(ticket))
@@ -69,7 +69,11 @@ class TicketService(
     fun getAllTickets(): List<Ticket> = ticketRepo.findAll().toList()
 
     fun getEventsByPacket(packetId: Int): List<Event> {
-        val eventIds = getAllTickets().filter { it.groupID == packetId }. map { it.eventID }
+        val eventIds = ticketRepo.getEventIDsByGroupID(packetId)
         return eventService.getEventsByIds(eventIds)
+    }
+
+    fun getPacketsByEventId(eventId: Int): List<Int> {
+        return ticketRepo.getGroupIDsByEventID(eventId)
     }
 }

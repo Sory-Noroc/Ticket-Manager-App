@@ -121,7 +121,8 @@ class EventPacketController(
 
     @RequestMapping(value = ["/events/{id}/event-packets"], method = [RequestMethod.GET])
     fun getEventPacketsByEventId(@PathVariable id: Int): ResponseEntity<CollectionModel<EntityModel<DataObject>>> {
-        val packetIds = ticketService.getAllTickets().filter { it.eventID == id }.map { it.groupID }
+//        val packetIds = ticketService.getAllTickets().filter { it.eventID == id }.map { it.groupID }
+        val packetIds = ticketService.getPacketsByEventId(id)
         val packets = packetService.getPacketsByIds(packetIds)
         val json = buildHateoasCollection(packets) {
             addManualLink(linkTo(EventPacketController::class.java).slash("/events").slash(id).slash("event-packets").withSelfRel())

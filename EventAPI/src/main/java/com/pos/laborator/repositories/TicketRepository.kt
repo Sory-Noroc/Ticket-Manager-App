@@ -11,4 +11,7 @@ interface TicketRepository: CrudRepository<Ticket, String> {
     fun getTicketByCode(code: String): Optional<Ticket>
     fun getTicketsByEventID(eventId: Int): List<Ticket>
     fun getTicketsByGroupID(groupId: Int): List<Ticket>
+
+    fun getGroupIDsByEventID(eventId: Int): List<Int>
+    fun getEventIDsByGroupID(packetID: Int): List<Int>
 }

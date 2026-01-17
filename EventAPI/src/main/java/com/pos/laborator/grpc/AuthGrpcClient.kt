@@ -33,7 +33,6 @@ class AuthGrpcClient {
             val response = stub.validateToken(request)
             response.valid
         } catch (e: Exception) {
-            // Log the exception
             println("Error validating token: ${e.message}")
             false
         }

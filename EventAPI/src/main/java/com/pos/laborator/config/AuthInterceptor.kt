@@ -11,7 +11,6 @@ import org.springframework.web.servlet.HandlerInterceptor
 class AuthInterceptor(private val authGrpcClient: AuthGrpcClient) : HandlerInterceptor {
 
     override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
-        // Allow OPTIONS requests to pass through for CORS preflight
         if (request.method.equals("OPTIONS", ignoreCase = true)) {
             return true
         }

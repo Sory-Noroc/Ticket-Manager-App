@@ -5,6 +5,7 @@ import com.pos.laborator.utils.buildHateoasCollection
 import com.pos.laborator.utils.buildHateoasModel
 import com.pos.laborator.model.Event
 import com.pos.laborator.interfaces.DataObject
+import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -31,7 +32,7 @@ class EventController(private val eventService: EventService) {
      * Returneaza 201 Created cu un header Location.
      */
     @PostMapping("/events")
-    fun addEvent(@RequestBody event: Event): ResponseEntity<EntityModel<Event>> {
+    fun addEvent(@RequestBody @Valid event: Event): ResponseEntity<EntityModel<Event>> {
         val savedEvent = eventService.addEvent(event)
 
         val json = buildHateoasModel(savedEvent) {

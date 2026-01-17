@@ -122,4 +122,22 @@ open class EventRepositoryTest {
         assertEquals(2, events.size)
         assertEquals("Other name", events[1].name)
     }
+
+    @Test
+    fun `test complex filter method`() {
+        // event1: name="Test event", location="Here", description="Forgot description"
+        // event2: name="Other event", location="There", description="Another event"
+
+        val result1 = eventRepository.findEventsByFilters(
+            "here", "test", "forgot"
+        )
+        assertEquals(1, result1.size)
+        assertEquals(event1.id, result1[0].id)
+
+        val result2 = eventRepository.findEventsByFilters(
+            "ere", "event", ""
+        )
+        // Both locations contain "ere" ("Here", "There"). Both names contain "event".
+        assertEquals(2, result2.size)
+    }
 }
