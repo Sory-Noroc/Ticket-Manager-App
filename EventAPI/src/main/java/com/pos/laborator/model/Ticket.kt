@@ -25,7 +25,7 @@ data class Ticket(
             random.nextBytes(bytes)
             val encoder = Base64.getUrlEncoder().withoutPadding()
 
-            return encoder.encodeToString(bytes)
+            return "Ticket_" + encoder.encodeToString(bytes)
         }
     }
 }

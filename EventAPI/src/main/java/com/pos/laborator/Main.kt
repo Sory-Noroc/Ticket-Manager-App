@@ -4,7 +4,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class EventAPI
+open class EventAPI
 
 fun main(args: Array<String>) {
     runApplication<EventAPI>(*args)

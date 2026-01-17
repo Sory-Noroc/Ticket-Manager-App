@@ -30,7 +30,7 @@ class EventController(private val eventService: EventService) {
      * Creeaza un eveniment nou.
      * Returneaza 201 Created cu un header Location.
      */
-    @PostMapping("/event")
+    @PostMapping("/events")
     fun addEvent(@RequestBody event: Event): ResponseEntity<EntityModel<Event>> {
         val savedEvent = eventService.addEvent(event)
 
@@ -52,7 +52,7 @@ class EventController(private val eventService: EventService) {
     @GetMapping("/events/{id}")
     fun getEvent(@PathVariable id: Int): ResponseEntity<EntityModel<Event>> {
         return try {
-            val event = eventService.getEvent(id) // Arunca NoSuchElementException
+            val event = eventService.getEvent(id)
             val eventModel = buildHateoasModel(event) {
                 addManualLink(linkTo(EventController::class.java).slash("events").slash(id).withSelfRel())
                 parent { methodOn(EventController::class.java).getEvents(null, null, null) }
@@ -95,7 +95,7 @@ class EventController(private val eventService: EventService) {
     @DeleteMapping("/events/{id}")
     fun deleteEvent(@PathVariable id: Int): ResponseEntity<EntityModel<Event>> {
         try {
-            val event = eventService.getEvent(id) // Arunca NoSuchElementException
+            val event = eventService.getEvent(id)
             eventService.deleteEvent(id)
             val json = buildHateoasModel(event) {
                 self { methodOn(EventController::class.java).getEvent(id) }

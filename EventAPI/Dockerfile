@@ -5,7 +5,7 @@ WORKDIR /app
 COPY EventAPI/pom.xml .
 COPY EventAPI/src ./src
 COPY AuthAPI/protos/auth.proto ./src/main/proto/auth.proto
-RUN mvn clean install -DskipTests -X
+RUN mvn clean install
 
 FROM openjdk:17.0.1-slim
 WORKDIR /app

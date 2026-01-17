@@ -3,8 +3,8 @@ package com.pos.laborator.services
 import com.pos.laborator.model.Event
 import com.pos.laborator.model.Ticket
 import com.pos.laborator.repositories.TicketRepository
-import org.springframework.data.jpa.domain.AbstractPersistable_.id
 import org.springframework.stereotype.Service
+import java.util.Optional
 
 @Service
 class TicketService(
@@ -24,7 +24,7 @@ class TicketService(
             // Check if this code already exists in the repository
             val existingTicket = ticketRepo.getTicketByCode(newCode)
 
-            if (existingTicket == null) {
+            if (existingTicket.isEmpty) {
                 isCodeUnique = true
             }
         } while (!isCodeUnique)
@@ -33,9 +33,17 @@ class TicketService(
         return ticketRepo.save(ticket)
     }
 
-    fun addTicket(ticket: Ticket) = ticketRepo.save(createNewTicket(ticket))
+    fun addTicket(ticket: Ticket): Ticket = ticketRepo.save(createNewTicket(ticket))
 
-    fun updateTicket(ticket: Ticket): Ticket? = ticketRepo.save(ticket)
+    fun updateTicket(ticket: Ticket): Optional<Ticket> {
+        try {
+            val existingTicket: Optional<Ticket> = getTicketByCode(ticket.code!!)
+        } catch (e: NullPointerException) {
+            return Optional.empty()
+        }
+        ticketRepo.save(ticket)
+        return Optional.of(ticket)
+    }
 
     fun getTicketByCode(code: String) = ticketRepo.getTicketByCode(code)
 
@@ -51,8 +59,8 @@ class TicketService(
      */
     fun deleteTicket(code: String): Boolean {
         val ticket = ticketRepo.getTicketByCode(code)
-        if (ticket != null) {
-            ticketRepo.delete(ticket)
+        if (ticket.isPresent) {
+            ticketRepo.delete(ticket.get())
             return true
         }
         return false

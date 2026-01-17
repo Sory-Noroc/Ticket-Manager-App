@@ -27,7 +27,7 @@ class HateoasModelBuilder<T>(private val resource: T) {
         links += link
     }
 
-    fun build(): EntityModel<T> = EntityModel.of(resource, *links.toTypedArray())
+    fun build(): EntityModel<T> = EntityModel.of(resource, *links.toTypedArray<Link>())
 }
 
 fun <T> buildHateoasModel(resource: T, builderAction: HateoasModelBuilder<T>.() -> Unit): EntityModel<T> {

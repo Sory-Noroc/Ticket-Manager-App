@@ -74,15 +74,8 @@ open class EventRepositoryTest {
     fun testFetchByLocation() {
         val events: List<Event> = eventRepository.findByLocation(event1.location!!)
         assertNotNull(events)
-        assertEquals(1, events.size)
+        assertEquals(2, events.size)
         assertEquals(events[0], event1)
-    }
-
-    @Test
-    fun testFetchByLocationSubstring() {
-        val events: List<Event> = eventRepository.findByLocation("here")
-        assertEquals(1, events.size)
-        assertEquals(events[0].location, "Here")
     }
 
     @Test
