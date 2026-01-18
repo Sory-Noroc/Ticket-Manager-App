@@ -11,22 +11,6 @@
       <change beforePath="$PROJECT_DIR$/../ClientAPI/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ClientAPI/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ClientAPI/model/TicketModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ClientAPI/model/TicketModel.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/config/AuthInterceptor.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/config/AuthInterceptor.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/controllers/EventController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/controllers/EventController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/controllers/EventPacketController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/controllers/EventPacketController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/controllers/TicketController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/controllers/TicketController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/grpc/AuthGrpcClient.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/grpc/AuthGrpcClient.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/model/Event.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/model/Event.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/model/Ticket.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/model/Ticket.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/repositories/EventRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/repositories/EventRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/repositories/TicketRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/repositories/TicketRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/services/EventService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/services/EventService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/services/TicketService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/services/TicketService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/pos/laborator/EventControllerIntegrationTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/pos/laborator/controllers/EventControllerIntegrationTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/pos/laborator/EventPacketControllerIntegrationTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/pos/laborator/controllers/EventPacketControllerIntegrationTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/pos/laborator/TicketControllerIntegrationTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/pos/laborator/controllers/TicketControllerIntegrationTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/pos/laborator/model/RepositoryTest.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -66,79 +50,79 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Docker.Dockerfile.executor": "Run",
-    "HTTP Request.All in event.executor": "Run",
-    "JUnit.All in EventAPI.executor": "Run",
-    "JUnit.DatabaseTest.addEvent.executor": "Run",
-    "JUnit.DatabaseTest.getEventsByLocation.executor": "Run",
-    "JUnit.DatabaseTest.getEventsByParameters.executor": "Run",
-    "JUnit.EventControllerIntegrationTest.when GET events endpoint is called, it should return 200 OK.executor": "Run",
-    "JUnit.EventRepositoryTest.testFetchByLocationSubstring.executor": "Run",
-    "JUnit.EventRepositoryTest.updateData.executor": "Run",
-    "JUnit.TicketControllerIntegrationTest.given a non-existent ticket code, when GET ticket by code is called, it should return 404 Not Found.executor": "Run",
-    "JUnit.TicketControllerIntegrationTest.given a ticket exists, when GET ticket by code is called, it should return 200 OK with ticket details.executor": "Run",
-    "JUnit.TicketControllerIntegrationTest.given a ticket exists, when GET ticket by code is called, it should return 200 OK.executor": "Run",
-    "JUnit.TicketControllerIntegrationTest.when DELETE an existing ticket, it should return 200 OK.executor": "Run",
-    "JUnit.TicketControllerIntegrationTest.when POST a new valid ticket, it should return 201 Created.executor": "Run",
-    "JUnit.UserRepositoryTest.executor": "Run",
-    "JUnit.UserRepositoryTest.testAddData.executor": "Run",
-    "JUnit.UserRepositoryTest.testFetchByLocationSubstring.executor": "Run",
-    "JUnit.UserRepositoryTest.testFetchData.executor": "Run",
-    "JUnit.UserRepositoryTest.testFetchFirstElement.executor": "Run",
-    "JUnit.UserRepositoryTest.testFindSimilarEvent.executor": "Run",
-    "JUnit.java in EventAPI.executor": "Run",
-    "Maven.EventAPI [clean,compile].executor": "Run",
-    "Maven.EventAPI [clean,install,spring-boot:run].executor": "Run",
-    "Maven.EventAPI [clean,install].executor": "Run",
-    "Maven.EventAPI [clean,test].executor": "Run",
-    "Maven.EventAPI [clean].executor": "Run",
-    "Maven.EventAPI [compile].executor": "Run",
-    "Maven.EventAPI [install].executor": "Run",
-    "Maven.EventAPI [org.apache.maven.plugins:maven-clean-plugin:3.4.0:clean].executor": "Run",
-    "Maven.EventAPI [spring-boot:stop,clean,install...].executor": "Run",
-    "Maven.EventAPI [test].executor": "Run",
-    "Maven.EventAPI [validate].executor": "Run",
-    "Maven.EventService [clean,install].executor": "Run",
-    "Maven.EventService [clean].executor": "Run",
-    "Maven.EventService [compile].executor": "Run",
-    "Maven.EventService [deploy].executor": "Run",
-    "Maven.EventService [install].executor": "Run",
-    "Maven.EventService [org.apache.maven.plugins:maven-clean-plugin:3.4.0:clean].executor": "Run",
-    "Maven.EventService [org.springframework.boot:spring-boot-maven-plugin:3.4.2:run].executor": "Run",
-    "Maven.EventService [package].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "OpenRewrite.UpgradeSpringBoot_2_0.executor": "Run",
-    "OpenRewrite.UpgradeSpringBoot_2_5.executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Spring Boot.EventAPI.executor": "Run",
-    "Spring Boot.EventService.executor": "Run",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "proiect",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Uni/Anul 4/Semestru 1/POS/PROIECT/EventAPI/src/main/proto",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Docker.Dockerfile.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.All in event.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.All in EventAPI.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.DatabaseTest.addEvent.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.DatabaseTest.getEventsByLocation.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.DatabaseTest.getEventsByParameters.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.EventControllerIntegrationTest.when GET events endpoint is called, it should return 200 OK.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.EventRepositoryTest.testFetchByLocationSubstring.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.EventRepositoryTest.updateData.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TicketControllerIntegrationTest.given a non-existent ticket code, when GET ticket by code is called, it should return 404 Not Found.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TicketControllerIntegrationTest.given a ticket exists, when GET ticket by code is called, it should return 200 OK with ticket details.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TicketControllerIntegrationTest.given a ticket exists, when GET ticket by code is called, it should return 200 OK.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TicketControllerIntegrationTest.when DELETE an existing ticket, it should return 200 OK.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.TicketControllerIntegrationTest.when POST a new valid ticket, it should return 201 Created.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserRepositoryTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserRepositoryTest.testAddData.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserRepositoryTest.testFetchByLocationSubstring.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserRepositoryTest.testFetchData.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserRepositoryTest.testFetchFirstElement.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserRepositoryTest.testFindSimilarEvent.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.java in EventAPI.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.EventAPI [clean,compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.EventAPI [clean,install,spring-boot:run].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.EventAPI [clean,install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.EventAPI [clean,test].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.EventAPI [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.EventAPI [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.EventAPI [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.EventAPI [org.apache.maven.plugins:maven-clean-plugin:3.4.0:clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.EventAPI [spring-boot:stop,clean,install...].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.EventAPI [test].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.EventAPI [validate].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.EventService [clean,install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.EventService [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.EventService [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.EventService [deploy].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.EventService [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.EventService [org.apache.maven.plugins:maven-clean-plugin:3.4.0:clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.EventService [org.springframework.boot:spring-boot-maven-plugin:3.4.2:run].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.EventService [package].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;OpenRewrite.UpgradeSpringBoot_2_0.executor&quot;: &quot;Run&quot;,
+    &quot;OpenRewrite.UpgradeSpringBoot_2_5.executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.EventAPI.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.EventService.executor&quot;: &quot;Run&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;proiect&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Uni/Anul 4/Semestru 1/POS/PROIECT/EventAPI/src/main/proto&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Uni\Anul 4\Semestru 1\POS\PROIECT\EventAPI\src\main\proto" />
@@ -328,7 +312,8 @@
       <workItem from="1768474038011" duration="6000" />
       <workItem from="1768559947129" duration="11019000" />
       <workItem from="1768603435221" duration="1150000" />
-      <workItem from="1768641232189" duration="18226000" />
+      <workItem from="1768641232189" duration="21251000" />
+      <workItem from="1768761537797" duration="1061000" />
     </task>
     <task id="LOCAL-00001" summary="First commit. Half of project">
       <option name="closed" value="true" />

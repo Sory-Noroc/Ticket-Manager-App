@@ -3,3 +3,5 @@ grpcio-tools
 python-dotenv
 PyJWT
 mysql-connector-python
+fastapi
+uvicorn
