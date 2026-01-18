@@ -19,6 +19,36 @@ class AuthService(auth_pb2_grpc.AuthServiceServicer):
         self.blocklist = set()
         self.jwt_secret = os.getenv("JWT_SECRET")
         database.init_db()
+        self._seed_admin()
+
+    def _seed_admin(self):
+        try:
+            db = database.get_db_connection()
+            cursor = db.cursor()
+            
+            username = "admin"
+            
+            cursor.execute("SELECT * FROM users WHERE username = %s", (username,))
+            if cursor.fetchone():
+                cursor.close()
+                db.close()
+                return
+
+            password = "admin_password"
+            email = "admin@example.com"
+            role = "admin"
+            hashed_password = hashlib.sha256(password.encode()).hexdigest()
+
+            cursor.execute(
+                "INSERT INTO users (username, password, email, role) VALUES (%s, %s, %s, %s)",
+                (username, hashed_password, email, role)
+            )
+            db.commit()
+            print(f"AuthAPI: Admin user created (user: {username}, pass: {password})")
+            cursor.close()
+            db.close()
+        except Exception as e:
+            print(f"AuthAPI: Error seeding admin: {e}")
 
     def _get_user_by_username(self, username):
         db = database.get_db_connection()

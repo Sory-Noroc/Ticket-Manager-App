@@ -44,3 +44,12 @@ export const getTicketHoldersForEvent = async (eventId: number, token: string) =
     });
     return response.data;
 };
+
+export const buyTicket = async (email: string, eventId: number, token: string) => {
+    const response = await clientApi.post(`/clients/${email}/buy-ticket/${eventId}`, {}, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+    return response.data;
+};

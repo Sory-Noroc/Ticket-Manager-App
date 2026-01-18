@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Typography, Box, CircularProgress, Alert, Grid, Card, CardContent, CardActions, Button } from '@mui/material';
+import { Container, Typography, CircularProgress, Alert, Grid, Card, CardContent, CardActions, Button } from '@mui/material';
 import { getAllEvents } from '../../api/event';
 import { Link } from 'react-router-dom';
 
@@ -72,7 +72,7 @@ const EventListPage: React.FC = () => {
       ) : (
         <Grid container spacing={3}>
           {events.map((event) => (
-            <Grid item key={event.id} xs={12} sm={6} md={4}>
+            <Grid key={event.id} size={{ xs: 12, sm: 6, md: 4 }}>
               <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
                 <CardContent sx={{ flexGrow: 1 }}>
                   <Typography gutterBottom variant="h5" component="h2">

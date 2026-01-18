@@ -20,4 +20,6 @@ data class Packet(
     var name: String,
     var location: String?,
     var description: String?,
+    @field:jakarta.validation.constraints.Min(0)
+    var seats: Int = 0
 ): DataObject

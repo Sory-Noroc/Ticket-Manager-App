@@ -24,4 +24,9 @@ open class EventService(private val repo: EventRepository) {
     fun getEventsByIds(ids: List<Int>): List<Event> {
         return repo.findAllById(ids).toList()
     }
+
+    fun decrementSeats(id: Int): Boolean {
+        val rowsUpdated = repo.decrementSeats(id)
+        return rowsUpdated > 0
+    }
 }

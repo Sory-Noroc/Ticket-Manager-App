@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
 import Login from './components/Login';
 import Register from './components/Register';
@@ -11,6 +10,7 @@ import ClientProfilePage from './pages/Client/ClientProfilePage';
 import ClientTicketsPage from './pages/Client/ClientTicketsPage';
 import OwnerDashboardPage from './pages/Owner/OwnerDashboardPage';
 import TicketHoldersPage from './pages/Owner/TicketHoldersPage';
+import AdminDashboardPage from './pages/Admin/AdminDashboardPage';
 
 const DashboardClientLanding = () => (
     <Container sx={{ mt: 4 }}>
@@ -62,6 +62,11 @@ const AppContent = () => {
                 {user?.role === 'owner-event' && (
                     <Button color="inherit" component={Link} to="/owner-dashboard">
                         Owner Dashboard
+                    </Button>
+                )}
+                {user?.role === 'admin' && (
+                    <Button color="inherit" component={Link} to="/admin-dashboard">
+                        Admin Dashboard
                     </Button>
                 )}
                 <Button color="inherit" onClick={handleLogout}>
@@ -129,6 +134,16 @@ const AppContent = () => {
             element={
               <ProtectedRoute allowedRoles={['owner-event']}>
                 <TicketHoldersPage />
+              </ProtectedRoute>
+            }
+          />
+
+           {/* Protected admin routes */}
+           <Route
+            path="/admin-dashboard"
+            element={
+              <ProtectedRoute allowedRoles={['admin']}>
+                <AdminDashboardPage />
               </ProtectedRoute>
             }
           />

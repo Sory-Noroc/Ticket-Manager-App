@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Container, Typography, Box, CircularProgress, Alert, Card, CardContent, Button } from '@mui/material';
-import { createTicket, getEventById } from '../../api/event';
-import { addTicketToClient } from '../../api/client';
+import { getEventById } from '../../api/event';
+import { buyTicket } from '../../api/client';
 import useAuthStore from '../../store/authStore';
 
 interface Event {
@@ -23,6 +23,23 @@ const EventDetailsPage: React.FC = () => {
   const [purchaseStatus, setPurchaseStatus] = useState<string | null>(null);
   const { isAuthenticated, user, token } = useAuthStore(); // Get auth state
 
+  const fetchEventDetails = async () => {
+    if (!id) {
+      setError('Event ID is missing.');
+      setLoading(false);
+      return;
+    }
+    try {
+      // setLoading(true); // Don't reset loading on refresh to avoid flicker
+      const data = await getEventById(id);
+      setEvent(data);
+    } catch (err: any) {
+      setError(err.message || 'Failed to fetch event details');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handlePurchaseTicket = async () => {
     if (!user?.email || !token || !event?.id) {
       setPurchaseStatus('You must be logged in as a client to purchase tickets.');
@@ -30,16 +47,10 @@ const EventDetailsPage: React.FC = () => {
     }
     setPurchaseStatus(null);
     try {
-      const ticketData = {
-        eventID: event.id,
-        groupID: 0
-      };
-
-      const createdTicket = await createTicket(ticketData);
-
-      await addTicketToClient(user.email, createdTicket.code, token);
-      
+      await buyTicket(user.email, event.id, token);
       setPurchaseStatus('Ticket purchased successfully! Check your tickets page.');
+      // Refresh event details to update seats
+      fetchEventDetails();
     } catch (err: any) {
       console.error(err);
       setPurchaseStatus(err.response?.data?.detail || err.message || 'Failed to purchase ticket.');
@@ -47,22 +58,7 @@ const EventDetailsPage: React.FC = () => {
   };
 
   useEffect(() => {
-    const fetchEventDetails = async () => {
-      if (!id) {
-        setError('Event ID is missing.');
-        setLoading(false);
-        return;
-      }
-      try {
-        setLoading(true);
-        const data = await getEventById(id);
-        setEvent(data);
-      } catch (err: any) {
-        setError(err.message || 'Failed to fetch event details');
-      } finally {
-        setLoading(false);
-      }
-    };
+    setLoading(true); // Initial load
     fetchEventDetails();
   }, [id]);
 

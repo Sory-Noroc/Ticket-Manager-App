@@ -6,12 +6,19 @@
   <component name="ChangeListManager">
     <list default="true" id="400e8ed3-3534-47fc-bb2b-220025ebffb9" name="Changes" comment="Event/packet/ticket endpoints finished">
       <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../AuthAPI/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../AuthAPI/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ClientAPI/auth_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ClientAPI/auth_client.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ClientAPI/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ClientAPI/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ClientAPI/model/TicketModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ClientAPI/model/TicketModel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/controllers/EventController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/controllers/EventController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/model/Packet.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/model/Packet.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/repositories/EventRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/repositories/EventRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/pos/laborator/services/EventService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/pos/laborator/services/EventService.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/api/client.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/api/client.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/pages/Client/ClientTicketsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/pages/Client/ClientTicketsPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/pages/Events/EventDetailsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/pages/Events/EventDetailsPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/pages/Events/EventListPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/pages/Events/EventListPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/pages/Owner/OwnerDashboardPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/pages/Owner/OwnerDashboardPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/pages/Owner/TicketHoldersPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/pages/Owner/TicketHoldersPage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -313,7 +320,7 @@
       <workItem from="1768559947129" duration="11019000" />
       <workItem from="1768603435221" duration="1150000" />
       <workItem from="1768641232189" duration="21251000" />
-      <workItem from="1768761537797" duration="1061000" />
+      <workItem from="1768761537797" duration="1659000" />
     </task>
     <task id="LOCAL-00001" summary="First commit. Half of project">
       <option name="closed" value="true" />

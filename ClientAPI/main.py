@@ -202,6 +202,50 @@ async def add_ticket_to_client(email: str, ticket_code: str, db: AsyncIOMotorDat
         except Exception as e:
             raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=f"An unexpected error occurred: {str(e)}")
 
+
+@app.post("/clients/{email}/buy-ticket/{event_id}", response_model=ClientModel)
+async def buy_ticket(email: str, event_id: int, db: AsyncIOMotorDatabase = Depends(get_database)):
+    # 1. Verifica client
+    client_data = await db.clients.find_one({"email": email})
+    if not client_data:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Client not found")
+    
+    # 2. Call EventAPI to decrement seats
+    async with httpx.AsyncClient() as client:
+        try:
+            # Call decrement endpoint
+            resp = await client.post(f"{EVENT_API_BASE_URL}/events/{event_id}/tickets")
+            if resp.status_code == 409:
+                raise HTTPException(status_code=409, detail="No seats available or event not found")
+            elif resp.status_code != 200:
+                 raise HTTPException(status_code=resp.status_code, detail="Error communicating with EventAPI")
+            
+            # 3. Get Event Details to create ticket info
+            evt_res = await client.get(f"{EVENT_API_BASE_URL}/events/{event_id}")
+            evt_res.raise_for_status()
+            evt_data = evt_res.json()
+            
+            # 4. Create Ticket
+            import uuid
+            ticket_code = str(uuid.uuid4())
+            new_ticket = TicketModel(
+                code=ticket_code,
+                eventName=evt_data.get("name"),
+                eventLocation=evt_data.get("location"),
+                isPackage=False,
+                eventID=event_id,
+                groupID=None
+            )
+            
+            # 5. Save to MongoDB
+            client_model = ClientModel(**client_data)
+            client_model.tickets.append(new_ticket)
+            await db.clients.replace_one({"email": email}, client_model.model_dump())
+            return client_model
+            
+        except httpx.HTTPStatusError as e:
+             raise HTTPException(status_code=e.response.status_code, detail=f"Error from EventAPI: {e.response.text}")
+
 @app.get("/clients/ticket-holders/{event_id}", response_model=List[PublicClientInfo], dependencies=[Depends(verify_token)])
 async def get_ticket_holders_for_event(event_id: int, db: AsyncIOMotorDatabase = Depends(get_database)):
     

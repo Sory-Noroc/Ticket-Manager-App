@@ -67,7 +67,7 @@ const ClientTicketsPage: React.FC = () => {
             ) : (
                 <Grid container spacing={3}>
                     {tickets.map((ticket) => (
-                        <Grid item key={ticket.code} xs={12} sm={6} md={4}>
+                        <Grid key={ticket.code} size={{ xs: 12, sm: 6, md: 4 }}>
                             <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
                                 <CardContent sx={{ flexGrow: 1 }}>
                                     <Typography gutterBottom variant="h5" component="h2">

@@ -127,4 +127,18 @@ class EventController(private val eventService: EventService) {
         }
         return ResponseEntity(json, HttpStatus.OK)
     }
+
+    /**
+     * Decrementeaza numarul de locuri pentru un eveniment (simuleaza cumpararea unui bilet).
+     */
+    @PostMapping("/events/{id}/tickets")
+    fun purchaseTicket(@PathVariable id: Int): ResponseEntity<Void> {
+        val success = eventService.decrementSeats(id)
+        return if (success) {
+            ResponseEntity.ok().build()
+        } else {
+            // 409 Conflict - nu mai sunt locuri sau evenimentul nu exista
+            ResponseEntity.status(HttpStatus.CONFLICT).build()
+        }
+    }
 }
