@@ -1,3 +1,5 @@
+.env
+PROJECT_OVERVIEW.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
