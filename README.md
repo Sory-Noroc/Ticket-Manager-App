@@ -4,24 +4,16 @@ A microservices-based project for managing clients, events, and ticket sales. Th
 
 ## Architecture Overview
 
+
+### Architecture Diagram
+![Microservices Diagram](pos-project.drawio.png)
+
 The system consists of the following components:
 
 - **AuthAPI**: A Python FastAPI and gRPC service that handles user registration, authentication, and JWT issuance. It manages user roles (Client, Organizer, Admin) and uses a MySQL database.
 - **ClientAPI**: A Python FastAPI service responsible for managing client-specific data. It integrates with the AuthAPI for authentication and communicates with the EventAPI. It uses MongoDB for data persistence.
 - **EventAPI**: A Java/Kotlin Spring Boot application that manages events, ticket packages, and individual tickets. It provides a RESTful API and also includes gRPC support. It uses a MariaDB database.
 - **Frontend**: A React application built with Vite and TypeScript, providing a user interface for clients, event owners, and administrators.
-
-## Project Structure
-
-```text
-.
-├── AuthAPI/           # Python gRPC & FastAPI Auth Service
-├── ClientAPI/         # Python FastAPI Client Management Service
-├── EventAPI/          # Java/Kotlin Spring Boot Event Service
-├── frontend/          # React (Vite + TypeScript) UI
-├── logs/              # Log files for various services
-└── docker-compose.yml # Container orchestration (if applicable)
-```
 
 ## Microservices Detail
 
